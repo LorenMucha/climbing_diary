@@ -1,0 +1,68 @@
+:root{
+    --main-color:#0d47a1;
+    --active-color:#00C851;
+}
+/*navbar*/
+nav{
+    position: absolute;
+    top: 0;
+    left:0;
+    right: 0;
+}
+nav .sidebar_opener h2{
+    color:white;
+}
+/*sidenav*/
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: var(--active-color);
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+/*Views*/
+#left_view{
+    width:60%;
+}
+#right_view{
+    width:40%;
+}
+#right_view .card .card-body i:nth-of-type(1){
+   width:50%;
+}
+#right_view .card .card-body hr{
+    border-top: 2px solid black;
+}
+#right_view .card .card-body .container div:nth-of-type(1){
+    width:47%;
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

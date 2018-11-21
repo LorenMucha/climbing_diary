@@ -1,0 +1,39 @@
+{
+  "name": "tourenbuch",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "app/app.js",
+  "build": {
+    "files": [
+      "app/**/*",
+      "node_modules/**/*",
+      "src/**/**",
+      "package.json"
+    ]
+  },
+  "scripts": {
+    "postinstall": "install-app-deps",
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "build"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.5.0",
+    "bluebird": "^3.5.3",
+    "bootstrap": "4.1.3",
+    "jquery": "^3.3.1",
+    "popper": "^1.0.1",
+    "require": "^2.4.20",
+    "sqlite3": "^3.1.8"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.5.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "electron": "^1.4.10",
+    "electron-builder": "^10.8.1"
+  },
+  "keywords": [],
+  "author": "",
+  "description": ""
+}
