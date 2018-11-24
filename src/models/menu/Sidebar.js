@@ -1,6 +1,6 @@
-const Colors = require("../colors");
-const ClimbingView = require("../../view/climbing");
-const MainView = require("../../view/mainView");
+const Colors = require("../Colors");
+const ClimbingView = require("../../view/climbing/ClimbingView");
+const MainView = require("../../view/MainView");
 
 //sidebar object
 class Sidebar{
@@ -38,8 +38,8 @@ class Sidebar{
         });
 
         $(document).on("click",this.bouldern,function(){
-            //TODO ersetzen, Main View kann weg
-            mainview.clear();
+            //TODO ersetzen, Main View kann weg nur für Test
+            mainview.clearAllViews();
         });
         
         $(document).on("click",".sidebar_opener",function(){

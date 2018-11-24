@@ -1,5 +1,5 @@
-const Sidebar = require('../src/models/menu/sidebar');
-const Navbar = require("../src/models/menu/navbar")
+const Sidebar = require('../src/models/menu/Sidebar');
+const Navbar = require("../src/models/menu/Navbar");
 
 function main(){
     var sidebar = new Sidebar();

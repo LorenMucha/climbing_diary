@@ -11,10 +11,15 @@ class MainView{
             $('body').append('<div class="float-right" id="right_view"></div>');
         }
     }
-    clear(){
-        console.log("clear");
+    clearAllViews(){
         $("#right_view").empty();
         $("#left_view").empty();
+    }
+    clearLeftView(){
+        $("#left_view").empty();
+    }
+    clearRightView(){
+        $("#right_view").empty();
     }
 }
 
