@@ -1,7 +1,4 @@
 class RouteList{
-    constructor(_list){
-        this.list = _list;
-    }
     get List(){
         return this.list;
     }
