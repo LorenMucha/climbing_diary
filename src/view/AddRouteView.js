@@ -1,6 +1,8 @@
 const AddRouteController = require("../controller/AddRouteController");
 const Levels = require("../models/Levels");
 const Styles = require("../models/Styles");
+const Autocomplete = require("../controller/AutoComplete");
+
 class AddRouteView extends AddRouteController{
     constructor(){
         super();
@@ -11,14 +13,14 @@ class AddRouteView extends AddRouteController{
         const model = this;
         let levels = function(){
             let level = new Levels(),
-                list = '<select class="custom-select my-1 mr-sm-2" id="levels">';
+                list = `<select class="custom-select my-1 mr-sm-2" id="${model.id_level}">`;
             $.each(level.getRouteFrench(),function(key,value){
                 list +=`<option value="${value}">${value}</option>`;
             });
             return `${list}</select>`;
         },
         rating=function(){
-            let list = `<select class="custom-select my-1 mr-sm-2" id="inputState" class="form-control">`,
+            let list = `<select class="custom-select my-1 mr-sm-2 rating" id="${model.id_rating}" class="form-control">`,
                 stars=function(x){
                     let star_div = '';
                     for(let i=0; i<=x;i++){
@@ -33,7 +35,7 @@ class AddRouteView extends AddRouteController{
         },
         styles=function(){
             let style = new Styles(),
-                list = '<select class="custom-select my-1 mr-sm-2" id="levels">';
+                list = `<select class="custom-select my-1 mr-sm-2" id="${model.id_style}">`;
             $.each(style.styles,function(key,value){
                 list +=`<option value="${value.toLowerCase()}">${value}</option>`;
             });
@@ -71,9 +73,9 @@ class AddRouteView extends AddRouteController{
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 autocomplete">
                                 <label for="inputAddress">Gebiet</label>
-                                <input type="text" class="form-control" id="${this.id_area}"/>
+                                <input type="text" class="form-control" autocomplete="off" spellcheck="false" id="${this.id_area}"/>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Sektor</label>
@@ -92,7 +94,7 @@ class AddRouteView extends AddRouteController{
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Kommentar</label>
-                            <textarea class="form-control" id="comment" rows="3"></textarea>
+                            <textarea class="form-control" id="${this.id_comment}" rows="3"></textarea>
                           </div>
                         </form>
                     </div>
@@ -104,16 +106,44 @@ class AddRouteView extends AddRouteController{
               </div>
             </div>
         `;
-      //date picker
-      $('body').append(form);
+        //date picker
+        $('body').append(form);
         $('.datepicker').datepicker({
             format: 'mm/dd/yyyy',
             startDate: '-3d'
         });
-      //bind the click events
-      $(`#${this.id_save_btn}`).click(function(){model.save()});
-      $(`#${this.id_close_btn}`).click(function(){model.close();});
-      this.show();
+        //bind the click events
+        $(`#${this.id_save_btn}`).click(function(){model.save()});
+        $(`#${this.id_close_btn}`).click(function(){model.close();});
+        //open the add Dialog via bootstrap modal
+        this.show();
+
+        //autocomplete area`s
+        taskRepo.getAllAreas()
+            .then((data) => {
+                let source = function(){
+                  let data_set = [];
+                  $.each(data,function(key,value){
+                      data_set.push({"id":value.id,"name":value.name});
+                  });
+                  return data_set;
+                };
+                 // Initializing the autocomplete
+                Autocomplete.autocomplete(document.getElementById(this.id_area),source());
+        });
+        //autocomplete sector`s
+        taskRepo.getAllSectors()
+            .then((data) => {
+                let source = function(){
+                    let data_set = [];
+                    $.each(data,function(key,value){
+                        data_set.push({"id":value.id,"name":value.name});
+                    });
+                    return data_set;
+                };
+                // Initializing the autocomplete
+                Autocomplete.autocomplete(document.getElementById(this.id_sektor),source());
+            });
     }
 
 }

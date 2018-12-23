@@ -1,6 +1,6 @@
 class Styles{
     constructor() {
-        this.styles = ["OS", "Flash", "RP"]
+        this.styles = ["OS", "RP","Flash"]
     }
 }
 module.exports=Styles;

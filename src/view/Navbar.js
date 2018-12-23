@@ -1,5 +1,3 @@
-const SidebarController = require("../view/Sidebar");
-
 class Navbar{
     constructor(){
         this.init();

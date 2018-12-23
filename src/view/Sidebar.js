@@ -19,7 +19,6 @@ class Sidebar extends SideBarController{
         $('.closebtn').on("click",function(){object.close();});
 
         if(this.startView){
-            console.log("startView is set");
             this.setStartView(this.startView);
         }
     }

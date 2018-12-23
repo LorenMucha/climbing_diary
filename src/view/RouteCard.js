@@ -1,5 +1,3 @@
-const Colors = require("../models/Colors");
-
 class RouteCard{
     constructor(){
         this.color_levels={
@@ -9,7 +7,6 @@ class RouteCard{
         };
     }
     createPanel(_route){
-        var colors = new Colors();
         let level_color = _route.level.charAt(0),
             rating = function(){
                 let star_div = '';
@@ -17,8 +14,8 @@ class RouteCard{
                     star_div +='<i class="fas fa-star"></i>';
                 }
                 return star_div;
-            },
-            panel = `<div class="container route_panel" style="margin-top:2em;width:80%;">
+            };
+        return `<div class="container route_panel" style="margin-top:2em;width:80%;">
                         <div class="card" data-id="${_route.id}" data-rating="${_route.rating}">
                             <div class="card-header ${this.color_levels[level_color]}">
                                 <div class="float-left"><h6>${_route.name}</h6></div>
@@ -46,7 +43,6 @@ class RouteCard{
                             </div>
                         </div>
                     </div>`;
-        return panel;
     }
 }
 module.exports = RouteCard;
