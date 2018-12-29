@@ -20,7 +20,7 @@ class AddRouteController{
     save(){
         const model = this;
         let name = $(`#${this.id_name}`).val(),
-            style =$(`#${this.id_style}`).val(),
+            style =$(`#${this.id_style}`).val().toUpperCase(),
             date = function() {
                 let string = $(`#${model.id_date}`).val().split("/");
                 return `${string[2]}-${string[0]}-${string[1]}`;
@@ -40,20 +40,19 @@ class AddRouteController{
         let in_object = {
             date: date(),
             name: name,
-            area_id: gebiet().id,
+            area: gebiet(),
             level: level,
             style: style,
             rating: rating,
             comment: comment,
-            sector_id: sektor().id
+            sector: sektor()
         };
 
-      taskRepo.insertRoute(in_object)
+        climbing_taskRepo.insertRoute(in_object)
             .then((data) => {
                 this.close();
                 climbing_view.setRoutes();
-                //TODO insert 1. new
-            });
+        });
     }
 }
 module.exports = AddRouteController;

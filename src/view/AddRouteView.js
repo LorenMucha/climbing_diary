@@ -15,7 +15,9 @@ class AddRouteView extends AddRouteController{
             let level = new Levels(),
                 list = `<select class="custom-select my-1 mr-sm-2" id="${model.id_level}">`;
             $.each(level.getRouteFrench(),function(key,value){
-                list +=`<option value="${value}">${value}</option>`;
+                let selected = '';
+                if(value==='8a'){selected='selected';}
+                list +=`<option value="${value}" ${selected}>${value}</option>`;
             });
             return `${list}</select>`;
         },
@@ -119,7 +121,7 @@ class AddRouteView extends AddRouteController{
         this.show();
 
         //autocomplete area`s
-        taskRepo.getAllAreas()
+        climbing_taskRepo.getAllAreas()
             .then((data) => {
                 let source = function(){
                   let data_set = [];
@@ -131,19 +133,23 @@ class AddRouteView extends AddRouteController{
                  // Initializing the autocomplete
                 Autocomplete.autocomplete(document.getElementById(this.id_area),source());
         });
-        //autocomplete sector`s
-        taskRepo.getAllSectors()
-            .then((data) => {
-                let source = function(){
-                    let data_set = [];
-                    $.each(data,function(key,value){
-                        data_set.push({"id":value.id,"name":value.name});
-                    });
-                    return data_set;
-                };
-                // Initializing the autocomplete
-                Autocomplete.autocomplete(document.getElementById(this.id_sektor),source());
-            });
+        //sector autocomplete only fpr area which is set
+        $(`#${this.id_area}`).keyup(function(){
+           let name = $(this).val();
+            climbing_taskRepo.getAllSectorsByAreaName(name)
+                .then((data) => {
+                    let source = function(){
+                        let data_set = [];
+                        $.each(data,function(key,value){
+                            data_set.push({"id":value.id,"name":value.name});
+                        });
+                        return data_set;
+                    };
+                    // Initializing the autocomplete
+                    Autocomplete.autocomplete(document.getElementById(model.id_sektor),source());
+                });
+        });
+
     }
 
 }

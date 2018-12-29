@@ -16,6 +16,7 @@ class MainViewController{
     static clearRightView(){
         $("#right_view").empty();
     }
+
 }
 
 module.exports=MainViewController;

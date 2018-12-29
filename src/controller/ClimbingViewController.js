@@ -1,25 +1,16 @@
-const Route = require("../models/Route");
-const RouteList = require("../models/RouteList");
-const RoutePanel = require("../view/RouteCard");
-const MainView = require("../view/MainView");
+const AddButton = require("../view/AddButton");
 
 class ClimbingViewController{
-    constructor(){}
-    setRoutes(){
-        let routelist = new RouteList();
-        let right_view = $("#right_view");
-        taskRepo.getAllRoutes()
-            .then((data) => {
-                MainView.clearRightView();
-                let routes = data;
-                console.log(routes);
-                routelist.List = routes;
-                $.each(routes,function(key,value){
-                    let route = new Route(value.id,value.name,value.level,value.gebiet,value.stil,value.date,value.sektor,value.rating);
-                    let route_panel = new RoutePanel();
-                    right_view.append(route_panel.createPanel(route.Route));
-                })
-            });
+    constructor(){
+        this.id_sort_menu = "sort_menu";
+        this.id_route_list = "route_list";
+    }
+    setView(){
+        let add_button = new AddButton();
+        MainView.clearAllViews();
+        MainView.init(true,true);
+        this.setRoutes();
+        add_button.init();
     }
 }
 module.exports = ClimbingViewController;
