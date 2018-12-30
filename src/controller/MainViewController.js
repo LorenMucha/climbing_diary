@@ -2,21 +2,27 @@ class MainViewController{
     constructor(left=false,right=false){
         this.left=left;
         this.right=right;
-        this.left_id = "left_view";
-        this.right_id ="right_view";
-        this.root_id="root";
+        this.left_id = "#left_view";
+        this.right_id ="#right_view";
+        this.root_id="#root";
+        this.view_state="";
     }
-    static clearAllViews(){
-        $("#right_view").empty();
-        $("#left_view").empty();
+    clearAllViews(){
+       this.clearLeftView();
+       this.clearRightView();
     }
-    static clearLeftView(){
-        $("#left_view").empty();
+    clearLeftView(){
+        $(`${this.left_id}`).empty();
     }
-    static clearRightView(){
-        $("#right_view").empty();
+    clearRightView(){
+        $(`${this.right_id}`).empty();
     }
-
+    setViewState(_state){
+        this.view_state=_state;
+    }
+    getViewState(){
+        return this.view_state;
+    }
 }
 
 module.exports=MainViewController;

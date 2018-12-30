@@ -1,3 +1,6 @@
+/*
+all the database tasks for climbing
+ */
 class ClimbingTaskRepository {
     constructor(manager) {
         this.manager = manager;
@@ -29,33 +32,20 @@ class ClimbingTaskRepository {
         if(_order){
           order_value = 'r.'+_order;
         }
-        let query = `SELECT r.id, r.name,g.name as gebiet,level,r.stil,r.rating,r.kommentar, strftime('%d.%m.%Y',r.date) as date, k.name as sektor 
-                      FROM routen r, gebiete g, sektoren k 
-                      where g.id=r.gebiet and g.id=k.gebiet group by r.id 
+        let query = `SELECT r.id, r.${this.key_routes.name},g.${this.key_area.name} as gebiet,r.${this.key_routes.level},r.${this.key_routes.style},r.${this.key_routes.rating},
+                      r.${this.key_routes.comment}, strftime('%d.%m.%Y',r.${this.key_routes.date}) as date, k.${this.key_sector.name} as sektor 
+                      FROM ${this.table_routes} r, ${this.table_area} g, ${this.table_sector} k 
+                      where g.id=r.${this.key_routes.area} and g.id=k.${this.key_sector.gebiet_id} group by r.id 
                       Order By ${order_value} DESC`;
         return this.manager.all(query)
     }
     getAllAreas(){
-        return this.manager.all(`SELECT * FROM gebiete GROUP BY id`);
+        return this.manager.all(`SELECT * FROM ${this.table_area} GROUP BY id`);
     }
     getAllSectorsByAreaName(_name){
-      return this.manager.all(`SELECT s.name,s.koordinaten as koordinaten_sektor,a.koordinaten as koordinaten_area,s.gebiet,s.id 
-                               FROM sektoren s, gebiete a 
-                               where a.name Like '${_name}%' and s.gebiet=a.id GROUP BY s.id`);
-    }
-    getAreaById(area_id){
-        return this.manager.get(`SELECT * FROM gebiete where id= ?`,[area_id])
-    }
-    getSektorById(sektor_id){
-    return this.manager.get(`SELECT * FROM sektoren where id= ?`,[sektor_id])
-    }
-    insertArea(area_name){
-        return this.manager.run(`INSERT OR IGNORE INTO ${this.table_area} (${this.key_area.name}) 
-                    VALUES ('${area_name}');`)
-    }
-    insertSector(area_name,sector_name){
-        return this.manager.run(`INSERT OR IGNORE INTO ${this.table_area} (${this.key_area.name}) 
-                    VALUES ('${area_name}');`);
+      return this.manager.all(`SELECT s.${this.key_sector.name},s.${this.key_sector.coord} as koordinaten_sektor,a.${this.key_area.coord} as koordinaten_area,s.${this.key_sector.gebiet_id},s.id 
+                               FROM ${this.table_sector} s, ${this.table_area} a 
+                               where a.${this.key_area.name} Like '${_name}%' and s.${this.key_sector.gebiet_id}=a.id GROUP BY s.id`);
     }
     insertRoute(in_object){
         let query = [`

@@ -20,6 +20,10 @@ class SideBarController{
     setClimbingView(){
         climbing_view.setView();
     }
+    //Todo
+    setBoulderView(){
+        main_view.clearAllViews();
+    }
     highlightTag(element){
         $(element).css("color",colors.getActiveColor());
     }

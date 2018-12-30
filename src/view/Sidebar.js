@@ -17,6 +17,8 @@ class Sidebar extends SideBarController{
                         </div>`);
         //bind the click events
         $('.closebtn').on("click",function(){object.close();});
+        $('.routen').on("click",function(){object.setClimbingView()});
+        $('.bouldern').on("click",function(){object.setBoulderView()});
 
         if(this.startView){
             this.setStartView(this.startView);

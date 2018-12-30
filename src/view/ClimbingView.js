@@ -10,11 +10,11 @@ class ClimbingView extends ClimbingViewController{
     setRoutes(){
         const menu = this;
         let routelist = new RouteList();
-        $("#right_view").append(`<div id="${this.id_route_list}"></div>`);
+        $(`${main_view.right_id}`).append(`<div id="${this.id_route_list.replace("#","")}"></div>`);
         climbing_taskRepo.getAllRoutes()
             .then((data) => {
                 let routes = data,
-                    routeview = $(`#${menu.id_route_list}`);
+                    routeview = $(`${menu.id_route_list}`);
                 routelist.List = routes;
                 routeview.empty();
                 $.each(routes,function(key,value){
