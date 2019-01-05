@@ -74,9 +74,6 @@ class ClimbingTaskRepository {
     deleteRoute(_id){
         return this.manager.run(`DELETE FROM ${this.table_routes} WHERE id=${_id}`);
     }
-    updateRoute(_route){
-
-    }
     
   }
 module.exports = ClimbingTaskRepository;

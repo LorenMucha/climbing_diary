@@ -9,19 +9,25 @@ class ClimbingView extends ClimbingViewController{
     }
     setRoutes(){
         const menu = this;
-        let routelist = new RouteList();
-        $(`${main_view.right_id}`).append(`<div id="${this.id_route_list.replace("#","")}"></div>`);
         climbing_taskRepo.getAllRoutes()
             .then((data) => {
-                let routes = data,
-                    routeview = $(`${menu.id_route_list}`);
+                let routes = data;
+                let routelist = new RouteList(),
+                    routeview = $(`${menu.id_route_list}`),
+                    html = "";
+
                 routelist.List = routes;
-                routeview.empty();
+                routeview.remove();
+
                 $.each(routes,function(key,value){
                     let route = new Route(value.id,value.name,value.level,value.gebiet,value.stil,value.date,value.sektor,value.rating, value.kommentar);
                     let route_panel = new RoutePanel();
-                    routeview.append(route_panel.createPanel(route.Route));
-                })
+                    console.log(route_panel.createPanel(route.Route));
+                    html += route_panel.createPanel(route.Route);
+                });
+
+                $(`${main_view.right_id}`).html(`<div id="${this.id_route_list.replace("#","")}">${html}</div>`);
+
             });
     }
 }

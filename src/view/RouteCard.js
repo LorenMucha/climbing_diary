@@ -41,7 +41,11 @@ class RouteCard extends RouteCardController{
                                     <tbody>
                                     <tr>
                                         <td><b class="card-text route_level">${_route.level}</b></td>
-                                        <td><b class="card-text route_area">${_route.area}</b></td>
+                                        <td>
+                                            <b class="card-text route_area">${_route.area}</b>
+                                            <br/>
+                                            <span>${_route.sektor}</span>
+                                        </td>
                                         <td>${style_b()}</td>
                                         <td><b>${rating()}</b></td>
                                     </tr>
@@ -49,8 +53,6 @@ class RouteCard extends RouteCardController{
                                 </table>
                             </div>
                             <div class="card-footer">
-                                 <b class="card-title">Sektor</b>
-                                 <p class="card-text route_sektor">${_route.sektor}</p>
                                  <b class="card-title">Kommentar</b>
                                  <p class="card-text route_sektor">${_route.kommentar}</p>
                                  <hr class="w-100 divider"/>
@@ -82,7 +84,6 @@ class RouteCard extends RouteCardController{
                     click=0;
                     card.edit($(this).data("id"));
                 });
-
 
         return div;
     }

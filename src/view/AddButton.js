@@ -9,11 +9,17 @@ class AddButton extends MainView{
         var add_route_view = new AddRouteView({type:"add"});
         let html=`<button id="${this.id}" type="button" class="btn btn-primary">
                     <i class="fas fa-plus fa-2x"></i>
-                  </button>`;
-        $('body').append(html);
-        $(`#${this.id}`).click(function(){
+                  </button>`,
+            button = $(`#${this.id}`);
+        if(button.length==0) {
+            $('body').append(html);
+        }
+        $(document).on("click",`#${this.id}`,function(){
             add_route_view.init();
         });
+    }
+    remove(){
+        $(`#${this.id}`).remove();
     }
 
 }

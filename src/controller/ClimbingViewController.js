@@ -2,7 +2,6 @@ const AddButton = require("../view/AddButton");
 
 class ClimbingViewController{
     constructor(){
-        this.id_sort_menu = "#sort_menu";
         this.id_route_list = "#route_list";
     }
     setView(){
