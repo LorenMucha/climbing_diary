@@ -1,7 +1,7 @@
-const Colors = require("./Colors")
+const Colors = require("./Colors");
 
 class Route{
-    constructor(id,name,level,area,style,date,sektor,rating){
+    constructor(id,name,level,area,style,date,sektor,rating,kommentar){
         this.id = id,
         this.name=name;
         this.level = level;
@@ -10,6 +10,7 @@ class Route{
         this.date=date;
         this.sektor=sektor;
         this.rating=rating;
+        this.kommentar=kommentar;
     }
     get Route(){
         return{
@@ -20,7 +21,8 @@ class Route{
             style:this.style,
             date:this.date,
             sektor:this.sektor,
-            rating:this.rating
+            rating:this.rating,
+            kommentar:this.kommentar
         }
     }
 }

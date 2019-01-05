@@ -1,4 +1,4 @@
-class AddRouteController{
+class RouteController{
     constructor(){
         this.id_modal="#modal_addRoute";
         this.id_name ="#route_name";
@@ -13,7 +13,7 @@ class AddRouteController{
     show(){
         $(`${this.id_modal}`).modal('show');
     }
-    close(){
+    remove(){
         $(`${this.id_modal}`).remove();
         $('.modal-backdrop ').remove();
     }
@@ -22,8 +22,8 @@ class AddRouteController{
         let name = $(`${this.id_name}`).val(),
             style =$(`${this.id_style}`).val().toUpperCase(),
             date = function() {
-                let string = $(`${model.id_date}`).val().split("/");
-                return `${string[2]}-${string[0]}-${string[1]}`;
+                let string = $(`${model.id_date}`).val().split(".");
+                return `${string[2]}-${string[1]}-${string[0]}`;
             },
             gebiet =function(){
                 let sel = $(`${model.id_area}`);
@@ -49,10 +49,25 @@ class AddRouteController{
         };
 
         climbing_taskRepo.insertRoute(in_object)
-            .then((data) => {
-                this.close();
+            .then(() => {
+                this.remove();
                 climbing_view.setRoutes();
         });
     }
+    setValues(_route){
+        $(`${this.id_name}`).val(_route.name);
+        $(`${this.id_area}`).val(_route.area);
+        $(`${this.id_sektor}`).val(_route.sektor);
+        $(`${this.id_comment}`).val(_route.kommentar);
+        $(`${this.id_rating}`).val(_route.rating);
+        $(`${this.id_date}`).val(_route.date);
+        $(`${this.id_style}`).val(_route.style.toLowerCase());
+    }
+    update(_id){
+        climbing_taskRepo.deleteRoute(_id)
+            .then(()=>{
+            this.save();
+        });
+    }
 }
-module.exports = AddRouteController;
+module.exports = RouteController;

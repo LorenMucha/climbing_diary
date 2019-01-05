@@ -1,6 +1,7 @@
 @import url("../../node_modules/bootstrap/dist/css/bootstrap.min.css");
 @import url("../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css");
 @import url("../../node_modules/@fortawesome/fontawesome-free/css/all.css");
+@import url("../../node_modules/bootstrap-sweetalert/dist/sweetalert.css");
 @import url("autocomplete.css");
 
 :root{
@@ -65,10 +66,16 @@ nav .sidebar_opener h2{
     width:auto;
     height:100%;
     min-width: 40%;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 /* Card View*/
+#root #right_view .card{
+    cursor: pointer;
+}
+#root #right_view .card:hover{
+    box-shadow: 5px 10px var(--active-color);
+}
 #root #right_view .card .card-body{
     padding: 0.3rem;
 }
@@ -78,6 +85,15 @@ nav .sidebar_opener h2{
 #root #right_view .card .card-body table thead th{
    border-top: none;
    border-bottom: 2px solid black;
+}
+#root #right_view .card .card-footer{
+    display: none;
+}
+#root #right_view .card .card-footer .divider{
+    border-top: 2px solid black;
+}
+#root #right_view .card .card-footer .container i:hover{
+    color:var(--active-color);
 }
 /*add Button*/
 #btn_add{

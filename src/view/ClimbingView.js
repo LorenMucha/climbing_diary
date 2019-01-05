@@ -18,7 +18,7 @@ class ClimbingView extends ClimbingViewController{
                 routelist.List = routes;
                 routeview.empty();
                 $.each(routes,function(key,value){
-                    let route = new Route(value.id,value.name,value.level,value.gebiet,value.stil,value.date,value.sektor,value.rating);
+                    let route = new Route(value.id,value.name,value.level,value.gebiet,value.stil,value.date,value.sektor,value.rating, value.kommentar);
                     let route_panel = new RoutePanel();
                     routeview.append(route_panel.createPanel(route.Route));
                 })

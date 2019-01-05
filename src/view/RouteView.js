@@ -1,14 +1,28 @@
-const AddRouteController = require("../controller/AddRouteController");
+const RouteController = require("../controller/RouteController");
 const Levels = require("../models/Levels");
 const Autocomplete = require("../controller/AutoComplete");
 
-class AddRouteView extends AddRouteController{
-    constructor(){
+class RouteView extends RouteController{
+    constructor(_setting){
         super();
         this.id_save_btn ="#save_route";
         this.id_close_btn="#closeAddRouteView";
+        this.text={
+            add:{
+                title:"Neue Route",
+                save:"Speichern"
+            },
+            update:{
+                title:"Update",
+                save:"Update"
+            }
+        };
+        this.setting=_setting;
+
     }
     init(){
+        //refresh DOM
+        this.remove();
         const model = this;
         let levels = function(){
             let level = new Levels(),
@@ -46,7 +60,7 @@ class AddRouteView extends AddRouteController{
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title">Neue Route</h5>
+                    <h5 class="modal-title">${this.text[this.setting.type].title}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -64,8 +78,8 @@ class AddRouteView extends AddRouteController{
                             </div>
                             <div class="form-group col-md-6">
                                   <label>Datum</label>
-                                  <div class="input-group date" data-provide="datepicker">
-                                    <input type="text" class="form-control" id="${this.id_date.replace("#","")}"/>
+                                  <div class="input-group date">
+                                    <input type="text" class="form-control datepicker" id="${this.id_date.replace("#","")}"/>
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
                                     </div>
@@ -99,7 +113,7 @@ class AddRouteView extends AddRouteController{
                         </form>
                     </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="${this.id_save_btn.replace("#","")}">Speichern</button>
+                    <button type="button" class="btn btn-secondary" id="${this.id_save_btn.replace("#","")}">${this.text[this.setting.type].save}</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" id="${this.id_close_btn.replace("#","")}">Schließen</button>
                   </div>
                 </div>
@@ -109,12 +123,21 @@ class AddRouteView extends AddRouteController{
         //date picker
         $('body').append(form);
         $('.datepicker').datepicker({
-            format: 'mm/dd/yyyy',
-            startDate: '-3d'
+            language: 'de',
+            format: 'dd.mm.yyyy'
         });
         //bind the click events
-        $(`${this.id_save_btn}`).click(function(){model.save()});
-        $(`${this.id_close_btn}`).click(function(){model.close();});
+        $(`${this.id_save_btn}`).click(function(){
+            let id =model.setting.route_id;
+            if(id){
+                console.log("UPDATE");
+                model.update(id);
+            }else{
+                console.log("Create New Route");
+                model.save();
+            }
+        });
+        $(`${this.id_close_btn}`).click(function(){model.remove();});
         //open the add Dialog via bootstrap modal
         this.show();
 
@@ -149,6 +172,5 @@ class AddRouteView extends AddRouteController{
         });
 
     }
-
 }
-module.exports=AddRouteView;
+module.exports=RouteView;

@@ -5,9 +5,15 @@ class NavbarController{
     search(_string){
         let search = _string.toLowerCase();
         $(`.${main_view.getViewState()}_panel`).each(function(){
-           let name = $(this).find('.route_name').text().toLowerCase();
-           if(!name.includes(search)){
-               $(this).hide();
+           let name = $(this).find('.route_name').text().toLowerCase(),
+               grade = $(this).find('.route_level').text().toLowerCase(),
+               area = $(this).find('.route_area').text().toLowerCase(),
+               date = $(this).find('.route_date').text();
+           if(!name.includes(search)
+               && grade !== search
+               && !area.includes(search)
+               && !date.includes(search)){
+                    $(this).hide();
            }else{
                $(this).show();
            }

@@ -35,9 +35,16 @@ class ClimbingTaskRepository {
         let query = `SELECT r.id, r.${this.key_routes.name},g.${this.key_area.name} as gebiet,r.${this.key_routes.level},r.${this.key_routes.style},r.${this.key_routes.rating},
                       r.${this.key_routes.comment}, strftime('%d.%m.%Y',r.${this.key_routes.date}) as date, k.${this.key_sector.name} as sektor 
                       FROM ${this.table_routes} r, ${this.table_area} g, ${this.table_sector} k 
-                      where g.id=r.${this.key_routes.area} and g.id=k.${this.key_sector.gebiet_id} group by r.id 
+                      where g.id=r.${this.key_routes.area} and k.id=r.${this.key_routes.sector} group by r.id 
                       Order By ${order_value} DESC`;
         return this.manager.all(query)
+    }
+    getRoute(_id){
+        let query = `SELECT r.id, r.${this.key_routes.name},g.${this.key_area.name} as gebiet,r.${this.key_routes.level},r.${this.key_routes.style},r.${this.key_routes.rating},
+                      r.${this.key_routes.comment}, strftime('%d.%m.%Y',r.${this.key_routes.date}) as date, k.${this.key_sector.name} as sektor 
+                      FROM ${this.table_routes} r, ${this.table_area} g, ${this.table_sector} k 
+                      where g.id=r.${this.key_routes.area} and k.id=r.${this.key_routes.sector} AND r.id=${_id}`;
+        return this.manager.get(query);
     }
     getAllAreas(){
         return this.manager.all(`SELECT * FROM ${this.table_area} GROUP BY id`);
@@ -47,22 +54,28 @@ class ClimbingTaskRepository {
                                FROM ${this.table_sector} s, ${this.table_area} a 
                                where a.${this.key_area.name} Like '${_name}%' and s.${this.key_sector.gebiet_id}=a.id GROUP BY s.id`);
     }
-    insertRoute(in_object){
+    insertRoute(_route){
         let query = [`
                     INSERT OR IGNORE INTO ${this.table_area} (${this.key_area.name}) 
-                    VALUES ('${in_object.area.name}')`,`
+                    VALUES ('${_route.area.name}')`,`
                     INSERT OR IGNORE INTO ${this.table_sector} (${this.key_sector.name},${this.key_sector.gebiet_id}) 
-                    SELECT '${in_object.sector.name}',id 
+                    SELECT '${_route.sector.name}',id 
                     FROM ${this.table_area} 
-                    WHERE ${this.key_area.name}='${in_object.area.name}'`,`
+                    WHERE ${this.key_area.name}='${_route.area.name}'`,`
                     INSERT OR IGNORE INTO ${this.table_routes} 
                     (${this.key_routes.date},${this.key_routes.name},${this.key_routes.level},${this.key_routes.style},${this.key_routes.rating},${this.key_routes.comment},${this.key_routes.area},${this.key_routes.sector}) 
-                    SELECT '${in_object.date}','${in_object.name}','${in_object.level}','${in_object.style}',${in_object.rating},'${in_object.comment}',a.id,s.id 
+                    SELECT '${_route.date}','${_route.name}','${_route.level}','${_route.style}',${_route.rating},'${_route.comment}',a.id,s.id 
                     FROM ${this.table_area} a, ${this.table_sector} s 
-                    WHERE a.${this.key_area.name} = '${in_object.area.name}' 
-                    AND s.${this.key_sector.name}='${in_object.sector.name}'
+                    WHERE a.${this.key_area.name} = '${_route.area.name}' 
+                    AND s.${this.key_sector.name}='${_route.sector.name}'
                   `];
         return this.manager.transact(query);
+    }
+    deleteRoute(_id){
+        return this.manager.run(`DELETE FROM ${this.table_routes} WHERE id=${_id}`);
+    }
+    updateRoute(_route){
+
     }
     
   }
