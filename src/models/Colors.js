@@ -1,9 +1,16 @@
 class Colors{
-    getMainColor(){
+    static getMainColor(){
         return "#0d47a1";
     }
-    getActiveColor(){
+    static getActiveColor(){
         return "#00C851";
     }
+    static getWarningColor(){
+        return "#ffbb33";
+    }
+    static getDangerColor(){
+        return "#CC0000";
+    }
+
 }
 module.exports=Colors;

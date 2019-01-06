@@ -62,6 +62,7 @@ class RouteController{
         $(`${this.id_rating}`).val(_route.rating);
         $(`${this.id_date}`).val(_route.date);
         $(`${this.id_style}`).val(_route.style.toLowerCase());
+        $(`${this.id_level}`).val(_route.level);
     }
     update(_id){
         climbing_taskRepo.deleteRoute(_id)

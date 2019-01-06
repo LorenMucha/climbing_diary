@@ -3,6 +3,8 @@ const AddButton = require("../view/AddButton");
 class ClimbingViewController{
     constructor(){
         this.id_route_list = "#route_list";
+        this.id_chart = "#chart";
+        this.data = false;
     }
     setView(){
         let add_button = new AddButton();

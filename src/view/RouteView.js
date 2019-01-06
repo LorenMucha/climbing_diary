@@ -130,10 +130,8 @@ class RouteView extends RouteController{
         $(`${this.id_save_btn}`).click(function(){
             let id =model.setting.route_id;
             if(id){
-                console.log("UPDATE");
                 model.update(id);
             }else{
-                console.log("Create New Route");
                 model.save();
             }
         });

@@ -12,7 +12,6 @@ const climbing_taskRepo = new ClimbingTaskRepository(db_manager);
 const main_view = new MainView();
 const climbing_view = new ClimbingView();
 const style = new Styles();
-var colors = new Colors();
 function main(){
     var sidebar = new Sidebar("routen");
     var navbar = new Navbar();

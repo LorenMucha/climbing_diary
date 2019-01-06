@@ -25,7 +25,7 @@ class SideBarController{
         main_view.clearAllViews();
     }
     highlightTag(element){
-        $(element).css("color",colors.getActiveColor());
+        $(element).css("color",Colors.getActiveColor());
     }
 }
 module.exports = SideBarController;

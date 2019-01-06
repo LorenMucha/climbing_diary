@@ -23,7 +23,7 @@ class RouteCard extends RouteCardController{
                 return star_div;
             },
             div = `<div class="container climbing_panel" style="margin-top:2em;width:80%;">
-                        <div class="card" data-id="${_route.id}" data-rating="${_route.rating}">
+                        <div class="card" id="card_${_route.id}" data-id="${_route.id}" data-rating="${_route.rating}">
                             <div class="card-header ${this.color_levels[level_color]}">
                                 <div class="float-left"><h6 class="card-text route_name">${_route.name}</h6></div>
                                 <div class="float-right"><b class="card-text route_date">${_route.date}</b></div>
@@ -57,8 +57,8 @@ class RouteCard extends RouteCardController{
                                  <p class="card-text route_sektor">${_route.kommentar}</p>
                                  <hr class="w-100 divider"/>
                                  <div class="container w-100">
-                                    <span class="float-right delete_route" data-id="${_route.id}"><i class="fas fa-trash fa-2x"></i></span>
-                                    <span class="float-right mr-3 edit_route" data-id="${_route.id}"><i class="fas fa-pen fa-2x"></i></span>
+                                    <span class="float-right delete_route" data-id="${_route.id}" id="delete_${_route.id}"><i class="fas fa-trash fa-2x"></i></span>
+                                    <span class="float-right mr-3 edit_route" data-id="${_route.id}" id="edit_${_route.id}"><i class="fas fa-pen fa-2x"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -66,8 +66,7 @@ class RouteCard extends RouteCardController{
                 click = 0;
 
         $(document)
-            .on("click",".card",function(){
-                console.log("click");
+            .on("click",`#card_${_route.id}`,function(){
                 if(click===0) {
                     $(this).find('.card-footer').show();
                     click +=1;
@@ -76,11 +75,11 @@ class RouteCard extends RouteCardController{
                     click=0;
                 }
             })
-            .on("click",".delete_route",function(){
+            .on("click",`#delete_${_route.id}`,function(){
                 click=0;
                 card.delete($(this).data("id"));
             })
-            .on("click",".edit_route",function(){
+            .on("click",`#edit_${_route.id}`,function(){
                     click=0;
                     card.edit($(this).data("id"));
                 });

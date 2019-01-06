@@ -54,6 +54,15 @@ class ClimbingTaskRepository {
                                FROM ${this.table_sector} s, ${this.table_area} a 
                                where a.${this.key_area.name} Like '${_name}%' and s.${this.key_sector.gebiet_id}=a.id GROUP BY s.id`);
     }
+    countStyles(){
+        //todo get year condition
+        let query = `select ${this.key_routes.level},
+                        sum(${this.key_routes.style}='RP') as rp,
+                        sum(${this.key_routes.style}='OS') as os,
+                        sum(${this.key_routes.style}='FLASH') as flash
+                        from routen group by ${this.key_routes.level}`;
+        return this.manager.all(query);
+    }
     insertRoute(_route){
         let query = [`
                     INSERT OR IGNORE INTO ${this.table_area} (${this.key_area.name}) 
