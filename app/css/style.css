@@ -68,6 +68,17 @@ nav .sidebar_opener h2{
     overflow-y: auto;
     overflow-x: hidden;
 }
+/*Bar Chart*/
+.toolTip {
+    position: absolute;
+    display: none;
+    min-width: 80px;
+    height: auto;
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid var(--main-color);
+    padding: 14px;
+    text-align: center;
+}
 /* Card View*/
 #root #right_view .card{
     cursor: pointer;

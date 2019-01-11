@@ -41,7 +41,6 @@ class ClimbingView extends ClimbingViewController{
 
         climbing_taskRepo.countStyles()
             .then((data)=>{
-                console.log(data);
                 //Quelle:https://bl.ocks.org/mbostock/b5935342c6d21928111928401e2c8608
                 var series = d3.stack()
                     .keys(["flash","rp","os"])
@@ -74,10 +73,17 @@ class ClimbingView extends ClimbingViewController{
                     .selectAll("rect")
                     .data(function(d) { return d; })
                     .enter().append("rect")
+                    .attr("data-level",function(d){return d.data.level;})
+                    .attr("data-os",function(d){return d.data.os;})
+                    .attr("data-rp",function(d){return d.data.rp;})
+                    .attr("data-flash",function(d){return d.data.flash;})
                     .attr("width", x.bandwidth)
                     .attr("x", function(d) { return x(d.data.level); })
                     .attr("y", function(d) { return y(d[1]); })
                     .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+                    .on("mousemove", this.handleMouseOver)
+                    .on("mouseout", this.handleMouseOut);
+
 
                 svg.append("g")
                     .attr("transform", "translate(0," + y(0) + ")")
@@ -86,10 +92,6 @@ class ClimbingView extends ClimbingViewController{
                 svg.append("g")
                     .attr("transform", "translate(" + margin.left + ",0)")
                     .call(d3.axisLeft(y));
-
-                var legend = svg.append('g')
-                    .attr('class', 'legend')
-                    .attr('transform', 'translate(' + (40 + 12) + ', 0)');
 
                 function stackMin(serie) {
                     return d3.min(serie, function(d) { return d[0]; });
