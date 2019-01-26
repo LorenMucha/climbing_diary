@@ -54,6 +54,10 @@ class ClimbingTaskRepository {
                                FROM ${this.table_sector} s, ${this.table_area} a 
                                where a.${this.key_area.name} Like '${_name}%' and s.${this.key_sector.gebiet_id}=a.id GROUP BY s.id`);
     }
+    getYears(){
+        return this.manager.get(`select DISTINCT(strftime('%Y',${this.key_routes.date})) as year from ${this.table_routes} order by date DESC`);
+    }
+    //for the chart
     countStyles(){
         //todo get year condition
         let query = `select ${this.key_routes.level},

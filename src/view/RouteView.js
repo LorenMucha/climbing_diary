@@ -50,8 +50,8 @@ class RouteView extends RouteController{
         },
         styles=function(){
             let list = `<select class="custom-select my-1 mr-sm-2" id="${model.id_style.replace("#","")}">`;
-            $.each(style.styles,function(key,value){
-                list +=`<option value="${value.toLowerCase()}">${value}</option>`;
+            $.each(Styles.getStyles(),function(key,value){
+                list +=`<option value="${value.toLowerCase()}">${value.toUpperCase()}</option>`;
             });
             return `${list}</select>`;
         },

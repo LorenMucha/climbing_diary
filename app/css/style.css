@@ -2,6 +2,7 @@
 @import url("../../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css");
 @import url("../../node_modules/@fortawesome/fontawesome-free/css/all.css");
 @import url("../../node_modules/bootstrap-sweetalert/dist/sweetalert.css");
+@import url("../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css");
 @import url("autocomplete.css");
 
 :root{
@@ -57,14 +58,14 @@ nav .sidebar_opener h2{
     margin-bottom: 1rem;
 }
 #root #left_view{
-    width:auto;
-    min-width: 60%;
+    width:100%;
+    max-width: 60%;
     height:100%;
 }
 #root #right_view{
-    width:auto;
+    width:100%;
+    max-width: 40%;
     height:100%;
-    min-width: 40%;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -130,28 +131,36 @@ Add Route view
 }
 @media screen and (max-width: 1050px){
     #root #left_view{
-        min-width:50%;
+        max-width:50%;
     }
     #root #right_view{
-        min-width:40%;
+        max-width:40%;
     }
 }
 @media screen and (max-width: 950px){
     #root #left_view{
-        min-width:40%;
+        max-width:40%;
     }
     #root #right_view{
-        min-width:50%;
+        max-width:50%;
     }
 }
 @media screen and (max-width: 700px){
+    .navbar{
+        position: fixed;
+        left:0;
+        right:0;
+    }
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
     #root #left_view{
-        width:100%;
+        max-width:100%;
         height:75%;
     }
     #root #right_view{
-        width:100%;
+        max-width:100%;
+        overflow-y: hidden;
+        height:unset;
+        margin-bottom: 20px;
     }
 }

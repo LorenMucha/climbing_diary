@@ -8,10 +8,12 @@ class NavbarController{
            let name = $(this).find('.route_name').text().toLowerCase(),
                grade = $(this).find('.route_level').text().toLowerCase(),
                area = $(this).find('.route_area').text().toLowerCase(),
+               sektor =$(this).find('.route_sektor').text().toLowerCase(),
                date = $(this).find('.route_date').text();
            if(!name.includes(search)
                && grade !== search
                && !area.includes(search)
+               && !sektor.includes(search)
                && !date.includes(search)){
                     $(this).hide();
            }else{

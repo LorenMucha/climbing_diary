@@ -1,3 +1,5 @@
+require("jquery")
+
 const DatabaseManager = require("../src/database/Manager");
 const ClimbingTaskRepository = require("../src/database/ClimbingTasks");
 const MainView = require("../src/view/MainView");
@@ -11,8 +13,12 @@ const db_manager = new DatabaseManager('./data/touren.db');
 const climbing_taskRepo = new ClimbingTaskRepository(db_manager);
 const main_view = new MainView();
 const climbing_view = new ClimbingView();
-const style = new Styles();
 function main(){
     var sidebar = new Sidebar("routen");
     var navbar = new Navbar();
 }
+$(function(){
+    $(window).resize(function(){
+       climbing_view.setView();
+    });
+});

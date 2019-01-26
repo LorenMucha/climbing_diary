@@ -19,7 +19,7 @@ class RouteController{
     }
     save(){
         const model = this;
-        let name = $(`${this.id_name}`).val(),
+        let name = $(`${this.id_name}`).val().replace("'","`"),
             style =$(`${this.id_style}`).val().toUpperCase(),
             date = function() {
                 let string = $(`${model.id_date}`).val().split(".");

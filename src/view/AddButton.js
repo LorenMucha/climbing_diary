@@ -7,7 +7,7 @@ class AddButton extends MainView{
     }
     init(){
         var add_route_view = new AddRouteView({type:"add"});
-        let html=`<button id="${this.id}" type="button" class="btn btn-primary">
+        let html=`<button id="${this.id}" type="button" class="btn btn-primary" title="Neue Route hinzufügen">
                     <i class="fas fa-plus fa-2x"></i>
                   </button>`,
             button = $(`#${this.id}`);

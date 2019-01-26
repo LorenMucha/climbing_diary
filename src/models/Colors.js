@@ -1,15 +1,34 @@
 class Colors{
     static getMainColor(){
-        return "#0d47a1";
+        return "#4285F4";
     }
     static getActiveColor(){
-        return "#00C851";
+        return "#007E33";
     }
     static getWarningColor(){
-        return "#ffbb33";
+        return "#FF8800";
     }
     static getDangerColor(){
         return "#CC0000";
+    }
+    //must be a string1
+    static getGradeColor(_grade){
+        if(_grade.indexOf("8") !==-1){
+            return "#212121";
+        }else if(_grade.indexOf("7")!==-1){
+            return "#bf360c"
+        }else{
+            return "#FF8800";
+        }
+    }
+    static getStyleColor(_style){
+        if(_style==="os"){
+            return "#33b5e5";
+        }else if(_style==="rp"){
+            return "#0d47a1";
+        }else{
+            return "#00C851";
+        }
     }
 
 }

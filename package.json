@@ -28,7 +28,8 @@
     "require": "^2.4.20",
     "sqlite3": "^3.1.8",
     "sqlite3-transactions": "^0.0.5",
-    "d3": "^5.7.0"
+    "d3": "^5.7.0",
+    "bootstrap-slider": "^10.6.0"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.5.0",
@@ -38,6 +39,10 @@
     "electron-builder": "^10.8.1"
   },
   "keywords": [],
-  "author": "",
-  "description": ""
+  "author": "Loren Mucha",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LorenMucha/Climbing-Diary"
+  }
 }

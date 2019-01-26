@@ -34,14 +34,16 @@ class ClimbingView extends ClimbingViewController{
             });
     }
     setBarChart() {
-        let chart = $(`${this.id_chart}`);
+        let chart = $(`${this.id_chart}`),
+            width_chart=$('#left_view').width(),
+            height_chart=$(window).height()/2,
+            styles=Styles.getStyles();
         //create the DOM Element
         chart.remove();
-        $(`${main_view.left_id}`).html(`<svg width="960" height="500" id="${this.id_chart.replace("#", "")}"></svg>`);
+        $(`${main_view.left_id}`).append(`<svg width="${width_chart}" height="${height_chart}" id="${this.id_chart.replace("#", "")}"></svg>`);
 
         climbing_taskRepo.countStyles()
             .then((data)=>{
-                //Quelle:https://bl.ocks.org/mbostock/b5935342c6d21928111928401e2c8608
                 var series = d3.stack()
                     .keys(["flash","rp","os"])
                     .offset(d3.stackOffsetDiverging)
@@ -49,8 +51,8 @@ class ClimbingView extends ClimbingViewController{
 
                 var svg = d3.select("#chart"),
                     margin = {top: 20, right: 30, bottom: 30, left: 60},
-                    width = +svg.attr("width"),
-                    height = +svg.attr("height");
+                    width = +width_chart,
+                    height = +height_chart;
 
                 var x = d3.scaleBand()
                     .domain(data.map(function(d) { return d.level; }))
@@ -62,17 +64,20 @@ class ClimbingView extends ClimbingViewController{
                     .rangeRound([height - margin.bottom, margin.top]);
 
                 var colors = d3.scaleOrdinal()
-                    .domain(["os", "flash", "rp"])
-                    .range(["black", Colors.getWarningColor(), Colors.getDangerColor()]);
+                    .domain(styles)
+                    .range([Colors.getStyleColor(styles[0]), Colors.getStyleColor(styles[1]), Colors.getStyleColor(styles[2])]);
 
                 svg.append("g")
+                    .attr("class","bar")
                     .selectAll("g")
                     .data(series)
-                    .enter().append("g")
+                    .enter()
+                    .append("g")
                     .attr("fill", function(d) { return colors(d.key); })
                     .selectAll("rect")
                     .data(function(d) { return d; })
-                    .enter().append("rect")
+                    .enter()
+                    .append("rect")
                     .attr("data-level",function(d){return d.data.level;})
                     .attr("data-os",function(d){return d.data.os;})
                     .attr("data-rp",function(d){return d.data.rp;})
@@ -84,7 +89,6 @@ class ClimbingView extends ClimbingViewController{
                     .on("mousemove", this.handleMouseOver)
                     .on("mouseout", this.handleMouseOut);
 
-
                 svg.append("g")
                     .attr("transform", "translate(0," + y(0) + ")")
                     .call(d3.axisBottom(x));
@@ -92,6 +96,7 @@ class ClimbingView extends ClimbingViewController{
                 svg.append("g")
                     .attr("transform", "translate(" + margin.left + ",0)")
                     .call(d3.axisLeft(y));
+
 
                 function stackMin(serie) {
                     return d3.min(serie, function(d) { return d[0]; });
@@ -101,6 +106,9 @@ class ClimbingView extends ClimbingViewController{
                     return d3.max(serie, function(d) { return d[1]; });
                 }
             });
+    }
+    setTimeSlider(){
+        let html = ``
     }
 }
 

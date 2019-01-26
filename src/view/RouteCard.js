@@ -3,17 +3,12 @@ const RouteCardController = require("../controller/RouteCardController");
 class RouteCard extends RouteCardController{
     constructor(){
         super();
-        this.color_levels={
-            "8":"bg-dark text-white",
-            "7":"bg-success",
-            "6":"bg-warning"
-        };
     }
     createPanel(_route){
         const card = this;
         let level_color = _route.level.charAt(0),
             style_b=function(){
-                return `<b class="${style.getColorClass(_route.style)}">${_route.style.toUpperCase()}</b>`;
+                return `<b style="color:${Colors.getStyleColor(_route.style.toLowerCase())}">${_route.style.toUpperCase()}</b>`;
             },
             rating = function(){
                 let star_div = '';
@@ -24,7 +19,7 @@ class RouteCard extends RouteCardController{
             },
             div = `<div class="container climbing_panel" style="margin-top:2em;width:80%;">
                         <div class="card" id="card_${_route.id}" data-id="${_route.id}" data-rating="${_route.rating}">
-                            <div class="card-header ${this.color_levels[level_color]}">
+                            <div class="card-header text-white" style="background-color: ${Colors.getGradeColor(_route.level)}">
                                 <div class="float-left"><h6 class="card-text route_name">${_route.name}</h6></div>
                                 <div class="float-right"><b class="card-text route_date">${_route.date}</b></div>
                             </div>
@@ -44,7 +39,7 @@ class RouteCard extends RouteCardController{
                                         <td>
                                             <b class="card-text route_area">${_route.area}</b>
                                             <br/>
-                                            <span>${_route.sektor}</span>
+                                            <span class="route_sektor">${_route.sektor}</span>
                                         </td>
                                         <td>${style_b()}</td>
                                         <td><b>${rating()}</b></td>

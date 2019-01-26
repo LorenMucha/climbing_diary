@@ -21,13 +21,13 @@ class ClimbingViewController{
             .style("top", d3.event.pageY - 70 + "px")
             .style("display", "inline-block")
             .html(`
-                <b>${d.data.level}</b>
+                <b style="color:${Colors.getGradeColor(d.data.level)}">${d.data.level}</b>
                 <hr class="w-100"/>
-                <b class="${style.getColorClass('os')}">OS: ${d.data.os}</b>
+                <b style="color:${Colors.getStyleColor('os')}">OS: ${d.data.os}</b>
                 <br/>
-                <b class="${style.getColorClass('rp')}">RP: ${d.data.rp}</b>
+                <b style="color:${Colors.getStyleColor('rp')}">RP: ${d.data.rp}</b>
                 <br/>
-                <b class="${style.getColorClass('flash')}">Flash: ${d.data.flash}</b>
+                <b style="color:${Colors.getStyleColor('flash')}">Flash: ${d.data.flash}</b>
             `);
     }
     handleMouseOut(){
