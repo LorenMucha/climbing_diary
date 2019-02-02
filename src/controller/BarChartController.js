@@ -1,20 +1,9 @@
-const AddButton = require("../view/AddButton");
 const d3 = require("d3");
 var tooltip = d3.select("body").append("div").attr("class", "toolTip");
-class ClimbingViewController{
+
+class BarChartController{
     constructor(){
-        this.id_route_list = "#route_list";
-        this.id_chart = "#chart";
-        this.data = false;
-    }
-    setView(){
-        let add_button = new AddButton();
-        main_view.clearAllViews();
-        main_view.init(true,true);
-        main_view.setViewState("climbing");
-        this.create();
-        this.setRoutes();
-        add_button.init();
+        this.id="#chart";
     }
     handleMouseOver(d){
         tooltip
@@ -31,8 +20,8 @@ class ClimbingViewController{
                 <b style="color:${Colors.getStyleColor('flash')}">Flash: ${d.data.flash}</b>
             `);
     }
-    handleMouseOut(){
+    static handleMouseOut(){
         tooltip.style("display", "none");
     }
 }
-module.exports = ClimbingViewController;
+module.exports = BarChartController;

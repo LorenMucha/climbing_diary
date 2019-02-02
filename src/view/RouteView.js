@@ -46,6 +46,7 @@ class RouteView extends RouteController{
             for(let i=1;i<=5;i++){
                 list +=`<option value="${i}">${stars(i-1)}</option>`;
             }
+            console.log(`${list}</select>`);
             return `${list}</select>`;
         },
         styles=function(){

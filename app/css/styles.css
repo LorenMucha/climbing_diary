@@ -1,0 +1,11 @@
+:root{
+    --main-color:#0d47a1;
+    --active-color:#00C851;
+    --black-color: #111;
+}
+.w-15{
+    width: 15% !important;
+}
+.w-85{
+    width:85% !important;
+}

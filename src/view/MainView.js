@@ -1,4 +1,5 @@
 const MainViewController = require("../controller/MainViewController");
+
 class MainView extends MainViewController{
     constructor(){
        super();
