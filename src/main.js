@@ -16,6 +16,6 @@ function main(){
     var sidebar = new Sidebar("routen");
     var navbar = new Navbar();
     $(window).resize(function(){
-        climbing_view.setView();
+        climbing_view.refreshView();
     });
 }

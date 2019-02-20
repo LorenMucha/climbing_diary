@@ -41,11 +41,10 @@ class Table extends TableController{
                         });
                     return result;
                     };
-                console.log(count_styles());
+
                 $.each(count_styles(),function(key,val){
                     let grade=Object.keys(val)[0];
-                    console.log(val[grade].os);
-                    tbody += `<tr>
+                    tbody += `<tr style="background-color: ${Colors.getGradeColor(grade)}; color:white;">
                                 <td>${grade}</td>
                                 <td>${val[grade].os}</td>
                                 <td>${val[grade].rp}</td>
@@ -59,7 +58,7 @@ class Table extends TableController{
                 <table class="table table-striped">
                      ${header()}
                      ${body()}
-                    </table>
+                </table>
             `;
         $(`${this.id}`).html(html);
         body();

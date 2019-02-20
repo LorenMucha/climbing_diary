@@ -1,38 +1,50 @@
 const AddButton = require("../view/AddButton");
-const d3 = require("d3");
-var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+
+var filter = false;
+
 class ClimbingViewController{
     constructor(){
         this.id_route_list = "#route_list";
         this.id_chart = "#chart";
+        this.id_chartButton="#chartButton";
         this.data = false;
+        this.filter = false;
+        this.bar_chart = false;
+        this.table=false;
+        this.slider=false;
+        this.line_chart=false;
+    }
+    setFilter(_filter){
+        filter=_filter;
+    }
+    getFilter(){
+        return filter;
+    }
+    removeFilter(){
+        filter=false;
     }
     setView(){
         let add_button = new AddButton();
         main_view.clearAllViews();
         main_view.init(true,true);
         main_view.setViewState("climbing");
-        this.create();
-        this.setRoutes();
+        this.setRouteView();
+        this.setStatistikView();
         add_button.init();
     }
-    handleMouseOver(d){
-        tooltip
-            .style("left", d3.event.pageX - 80 + "px")
-            .style("top", d3.event.pageY - 70 + "px")
-            .style("display", "inline-block")
-            .html(`
-                <b style="color:${Colors.getGradeColor(d.data.level)}">${d.data.level}</b>
-                <hr class="w-100"/>
-                <b style="color:${Colors.getStyleColor('os')}">OS: ${d.data.os}</b>
-                <br/>
-                <b style="color:${Colors.getStyleColor('rp')}">RP: ${d.data.rp}</b>
-                <br/>
-                <b style="color:${Colors.getStyleColor('flash')}">Flash: ${d.data.flash}</b>
-            `);
+    refreshView(){
+        this.setRouteView();
     }
-    handleMouseOut(){
-        tooltip.style("display", "none");
+    handleChartButtonClick(){
+        let btn = $(this.id_chartButton),
+            data = btn.data("val");
+        if(data==="bar"){
+            this.line_chart.create();
+            btn.data("val","line");
+        }else{
+          this.bar_chart.create();
+          btn.data("val","bar");
+        }
     }
 }
 module.exports = ClimbingViewController;

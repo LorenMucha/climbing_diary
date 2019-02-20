@@ -1,9 +1,11 @@
 class NavbarController{
     constructor(){
         this.search_id ="navbar_search";
+        this.id_leftTab ="leftTab";
+        this.id_rightTab="rightTab";
     }
-    search(_string){
-        let search = _string.toLowerCase();
+    search(){
+        let search = $(`#${this.search_id}`).val().toLowerCase();
         $(`.${main_view.getViewState()}_panel`).each(function(){
            let name = $(this).find('.route_name').text().toLowerCase(),
                grade = $(this).find('.route_level').text().toLowerCase(),

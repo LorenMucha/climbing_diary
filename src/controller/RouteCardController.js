@@ -24,7 +24,7 @@ class RouteCardController{
                             confirmButtonClass: "btn-success",
                             confirmButtonText: "Ok",
                         });
-                        climbing_view.setRoutes();
+                        climbing_view.setRouteView();
                     });
             });
     }

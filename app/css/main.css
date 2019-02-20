@@ -52,13 +52,13 @@ nav .sidebar_opener h2{
     right:0;
     bottom: 0;
     top:75px;
-    margin-bottom: 1rem;
 }
 #root #left_view{
     width:100%;
     max-width: 60%;
     height:100%;
-    display: inline-block;
+    padding:3vh;
+    display: flex;
 }
 #root #right_view{
     width:100%;
@@ -66,17 +66,7 @@ nav .sidebar_opener h2{
     height:100%;
     overflow-y: auto;
     overflow-x: hidden;
-}
-/*Bar Chart*/
-.toolTip {
-    position: absolute;
-    display: none;
-    min-width: 80px;
-    height: auto;
-    background: none repeat scroll 0 0 #ffffff;
-    border: 1px solid var(--main-color);
-    padding: 14px;
-    text-align: center;
+    padding-bottom: 2vh;
 }
 /* Card View*/
 #root #right_view .card{
@@ -105,12 +95,50 @@ nav .sidebar_opener h2{
     color:var(--active-color);
 }
 /*left view*/
-#root #left_view .stat-controller{
-    margin: 10px;
+#root #left_view .stat-controller #slider_content{
+    padding-top: 2vh;
+}
+#root #left_view .stat-controller .btn{
+    background-color: var(--main-color);
+}
+#root #left_view .stat-controller #slider_content #timeslider-label{
+    margin-bottom: 2vh;
+}
+#root #left_view .stat-controller #slider_content .slider-selection{
+    background: var(--main-color);
 }
 #root #left_view .climbing_stat{
    left: 10px;
 }
+/*chart-----------------*/
+#root #left_view .climbing_stat #chart{
+    height:40%;
+}
+#root #left_view .climbing_stat #table{
+    height:60%;
+    overflow: auto;
+}
+#root #left_view .climbing_stat #chart .line {
+    fill: none;
+    stroke: var(--main-color);
+    stroke-width: 2px;
+}
+#root #left_view .climbing_stat #chart .dot {
+    fill: var(--main-color);
+}
+.toolTip {
+    position: absolute;
+    display: none;
+    min-width: 80px;
+    height: auto;
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid var(--main-color);
+    padding: 14px;
+    text-align: center;
+    z-index: 3000;
+    pointer-events: none;
+}
+
 /*add Button*/
 #btn_add{
     position: fixed;

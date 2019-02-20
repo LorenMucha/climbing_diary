@@ -20,7 +20,7 @@ class BarChartController{
                 <b style="color:${Colors.getStyleColor('flash')}">Flash: ${d.data.flash}</b>
             `);
     }
-    static handleMouseOut(){
+    handleMouseOut(){
         tooltip.style("display", "none");
     }
 }

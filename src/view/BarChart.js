@@ -1,15 +1,17 @@
 const BarChartController = require("../controller/BarChartController");
 const d3 = require("d3");
 
+
 class BarChart extends BarChartController{
     create(){
-        let width_chart=$(`${this.id}`).width(),
+        let container = $(`${this.id}`),
+            width_chart=container.width(),
             height_chart=$(window).height()/3,
             styles=Styles.getStyles();
         //create the DOM Element
-        $(`${this.id}`).html(`<svg width="${width_chart}" height="${height_chart}"></svg>`);
+        container.html(`<svg width="${width_chart}" height="${height_chart}"></svg>`);
 
-        climbing_taskRepo.countStyles()
+        climbing_taskRepo.getBarChartData(climbing_view.getFilter())
             .then((data)=>{
                 var series = d3.stack()
                     .keys(["flash","rp","os"])
@@ -56,7 +58,7 @@ class BarChart extends BarChartController{
                     .attr("height", function(d) { return y(d[0]) - y(d[1]); })
                     .on("mousemove", this.handleMouseOver)
                     .on("click", this.handleMouseOver)
-                    .on("mouseout", BarChartController.handleMouseOut);
+                    .on("mouseout", this.handleMouseOut);
 
                 svg.append("g")
                     .attr("transform", "translate(0," + y(0) + ")")

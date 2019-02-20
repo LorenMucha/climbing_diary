@@ -51,7 +51,8 @@ class RouteController{
         climbing_taskRepo.insertRoute(in_object)
             .then(() => {
                 this.remove();
-                climbing_view.setRoutes();
+                climbing_view.setFilter(false);
+                climbing_view.setRouteView();
         });
     }
     setValues(_route){

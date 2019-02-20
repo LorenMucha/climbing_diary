@@ -27,17 +27,23 @@ class ClimbingTaskRepository {
             gebiet_id:"gebiet"
         };
     }
-    getAllRoutes(_order) {
-        let order_value =  'datetime(r.date)';
+    getAllRoutes(_order,_filter) {
+        let order_value =  `r.${this.key_routes.level}`,
+            filter = '';
         if(_order){
           order_value = 'r.'+_order;
+        }
+        if(_filter){
+            filter = 'and '+_filter;
         }
         let query = `SELECT r.id, r.${this.key_routes.name},g.${this.key_area.name} as gebiet,r.${this.key_routes.level},r.${this.key_routes.style},r.${this.key_routes.rating},
                       r.${this.key_routes.comment}, strftime('%d.%m.%Y',r.${this.key_routes.date}) as date, k.${this.key_sector.name} as sektor 
                       FROM ${this.table_routes} r, ${this.table_area} g, ${this.table_sector} k 
-                      where g.id=r.${this.key_routes.area} and k.id=r.${this.key_routes.sector} group by r.id 
+                      where g.id=r.${this.key_routes.area} and k.id=r.${this.key_routes.sector} 
+                      ${filter}
+                      group by r.id 
                       Order By ${order_value} DESC`;
-        return this.manager.all(query)
+        return this.manager.all(query);
     }
     getRoute(_id){
         let query = `SELECT r.id, r.${this.key_routes.name},g.${this.key_area.name} as gebiet,r.${this.key_routes.level},r.${this.key_routes.style},r.${this.key_routes.rating},
@@ -55,16 +61,43 @@ class ClimbingTaskRepository {
                                where a.${this.key_area.name} Like '${_name}%' and s.${this.key_sector.gebiet_id}=a.id GROUP BY s.id`);
     }
     getYears(){
-        return this.manager.get(`select DISTINCT(strftime('%Y',${this.key_routes.date})) as year from ${this.table_routes} order by date DESC`);
+        return this.manager.all(`select DISTINCT(strftime('%Y',${this.key_routes.date})) as year from ${this.table_routes} order by date DESC`);
     }
     //for the chart
-    countStyles(){
-        //todo get year condition
-        let query = `select ${this.key_routes.level},
-                        sum(${this.key_routes.style}='RP') as rp,
-                        sum(${this.key_routes.style}='OS') as os,
-                        sum(${this.key_routes.style}='FLASH') as flash
-                        from routen group by ${this.key_routes.level}`;
+    getBarChartData(_filter){
+        let filter = function(){
+                if(_filter){
+                    return 'where '+_filter;
+                }else{
+                    return '';
+                }
+        },
+        query = `select r.${this.key_routes.level},
+                        sum(r.${this.key_routes.style}='RP') as rp,
+                        sum(r.${this.key_routes.style}='OS') as os,
+                        sum(r.${this.key_routes.style}='FLASH') as flash
+                        from ${this.table_routes} r
+                        ${filter()}
+                        group by r.${this.key_routes.level}`;
+        return this.manager.all(query);
+    }
+    getLineChartData(_filter){
+        let filter = function(){
+                if(_filter){
+                    return 'where '+_filter;
+                }else{
+                    return '';
+                }
+            },
+        query=`SELECT SUM(cast(r.${this.key_routes.level} as int)*(25*(INSTR('abc',substr(replace(r.${this.key_routes.level},'+',''),-1)))
+                +INSTR('+',substr(r.${this.key_routes.level},-1))
+                +INSTR('rpflashos',r.${this.key_routes.style}))) as stat, 
+                COUNT(cast(r.${this.key_routes.level} as int)) as anzahl, 
+                strftime('%Y',r.${this.key_routes.date}) as date 
+                FROM ${this.table_routes} r
+                 ${filter()}
+                GROUP BY strftime('%Y',r.${this.key_routes.date})`;
+        console.log(query);
         return this.manager.all(query);
     }
     insertRoute(_route){
