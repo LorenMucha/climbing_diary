@@ -14,6 +14,7 @@ class AddButton extends MainView{
         if(button.length==0) {
             $('body').append(html);
         }
+
         $(document).on("click",`#${this.id}`,function(){
             add_route_view.init();
         });

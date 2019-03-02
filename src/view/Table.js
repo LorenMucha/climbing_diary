@@ -2,8 +2,14 @@ const TableController = require("../controller/TableController");
 
 class Table extends TableController{
     create(data){
+        let sorted_data = data.sort(function(a,b){
+            let level_list = Levels.getRouteFrench(),
+                ax = $.inArray(a.level,level_list),
+                bx = $.inArray(b.level,level_list);
+            return bx-ax;
+        });
         let grades =function(){
-                let values = data.map(function(route){return route.level}),
+                let values = sorted_data.map(function(route){return route.level}),
                     result = [],
                     result_add=[];
                 $.each(values, function(i, e) {
@@ -27,7 +33,7 @@ class Table extends TableController{
                     count_styles = function() {
                         let result=grades();
                         $.each(grades(),function(x,level){
-                            $.each(data, function (key, val) {
+                            $.each(sorted_data, function (key, val) {
                                 $.each(Styles.getStyles(),function(s,style)
                                 {
                                     try {

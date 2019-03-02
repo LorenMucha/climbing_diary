@@ -1,7 +1,7 @@
 const AddButton = require("../view/AddButton");
 
 var filter = false;
-
+var order = false;
 class ClimbingViewController{
     constructor(){
         this.id_route_list = "#route_list";
@@ -19,6 +19,12 @@ class ClimbingViewController{
     }
     getFilter(){
         return filter;
+    }
+    setOrder(_order){
+        order=_order;
+    }
+    getOrder(){
+        return order;
     }
     removeFilter(){
         filter=false;

@@ -11,6 +11,7 @@ const db_manager = new DatabaseManager('./data/touren.db');
 const climbing_taskRepo = new ClimbingTaskRepository(db_manager);
 const main_view = new MainView();
 const climbing_view = new ClimbingView();
+const Levels = require("../src/models/Levels");
 
 function main(){
     var sidebar = new Sidebar("routen");

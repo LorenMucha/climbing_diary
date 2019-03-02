@@ -43,6 +43,7 @@ class ClimbingTaskRepository {
                       ${filter}
                       group by r.id 
                       Order By ${order_value} DESC`;
+        console.log(query);
         return this.manager.all(query);
     }
     getRoute(_id){

@@ -12,10 +12,14 @@ class MainViewController{
        this.clearRightView();
     }
     clearLeftView(){
-        $(`${this.left_id}`).empty();
+        try {
+            document.getElementById(this.left_id.replace("#", "")).innerHTML = "";
+        }catch(err){}
     }
     clearRightView(){
-        $(`${this.right_id}`).empty();
+        try {
+            document.getElementById(this.right_id.replace("#", "")).innerHTML = "";
+        }catch(err){}
     }
     setViewState(_state){
         this.view_state=_state;

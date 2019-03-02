@@ -3,6 +3,7 @@ class NavbarController{
         this.search_id ="navbar_search";
         this.id_leftTab ="leftTab";
         this.id_rightTab="rightTab";
+        this.sort_id="navbar_sort";
     }
     search(){
         let search = $(`#${this.search_id}`).val().toLowerCase();
@@ -22,6 +23,10 @@ class NavbarController{
                $(this).show();
            }
         });
+    }
+    sort(value){
+        climbing_view.setOrder(value);
+        climbing_view.setRouteView();
     }
 }
 module.exports=NavbarController;

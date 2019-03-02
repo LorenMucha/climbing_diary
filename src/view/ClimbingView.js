@@ -12,9 +12,8 @@ class ClimbingView extends ClimbingViewController{
         super();
     }
     setRouteView(){
-        const menu = this;
-
-        climbing_taskRepo.getAllRoutes(false,this.getFilter())
+        console.log(this.getFilter());
+        climbing_taskRepo.getAllRoutes(this.getOrder(),this.getFilter())
             .then((data) => {
                 this.data = data;
                 let routes = data;

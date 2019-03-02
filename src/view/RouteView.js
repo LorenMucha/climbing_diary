@@ -1,5 +1,4 @@
 const RouteController = require("../controller/RouteController");
-const Levels = require("../models/Levels");
 const Autocomplete = require("../controller/AutoComplete");
 
 class RouteView extends RouteController{
@@ -25,9 +24,8 @@ class RouteView extends RouteController{
         this.remove();
         const model = this;
         let levels = function(){
-            let level = new Levels(),
-                list = `<select class="custom-select my-1 mr-sm-2" id="${model.id_level.replace("#","")}">`;
-            $.each(level.getRouteFrench(),function(key,value){
+            let list = `<select class="custom-select my-1 mr-sm-2" id="${model.id_level.replace("#","")}">`;
+            $.each(Levels.getRouteFrench(),function(key,value){
                 let selected = '';
                 if(value==='8a'){selected='selected';}
                 list +=`<option value="${value}" ${selected}>${value}</option>`;
