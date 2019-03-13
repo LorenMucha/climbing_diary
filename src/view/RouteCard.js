@@ -6,8 +6,7 @@ class RouteCard extends RouteCardController{
     }
     createPanel(_route){
         const card = this;
-        let level_color = _route.level.charAt(0),
-            style_b=function(){
+        let style_b=function(){
                 return `<b style="color:${Colors.getStyleColor(_route.style.toLowerCase())}">${_route.style.toUpperCase()}</b>`;
             },
             rating = function(){
@@ -35,7 +34,7 @@ class RouteCard extends RouteCardController{
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td><b class="card-text route_level">${_route.level}</b></td>
+                                        <td><b class="card-text route_level" style="color:${Colors.getGradeColor(_route.level.charAt(0))}">${_route.level}</b></td>
                                         <td>
                                             <b class="card-text route_area">${_route.area}</b>
                                             <br/>
@@ -51,7 +50,7 @@ class RouteCard extends RouteCardController{
                                  <b class="card-title">Kommentar</b>
                                  <p class="card-text route_sektor">${_route.kommentar}</p>
                                  <hr class="w-100 divider"/>
-                                 <div class="container w-100">
+                                 <div class="container w-100 mt-1vh">
                                     <span class="float-right delete_route" data-id="${_route.id}" id="delete_${_route.id}"><i class="fas fa-trash fa-2x"></i></span>
                                     <span class="float-right mr-3 edit_route" data-id="${_route.id}" id="edit_${_route.id}"><i class="fas fa-pen fa-2x"></i></span>
                                 </div>

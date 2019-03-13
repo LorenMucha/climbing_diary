@@ -22,12 +22,13 @@ class Colors{
         }
     }
     static getStyleColor(_style){
-        if(_style==="os"){
-            return "#33b5e5";
-        }else if(_style==="rp"){
-            return "#0d47a1";
-        }else{
-            return "#00C851";
+        switch(_style){
+            case "os":
+                return "#33b5e5";
+            case "rp":
+                return "#0d47a1";
+            default:
+                return "#00C851";
         }
     }
 

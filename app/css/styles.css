@@ -18,6 +18,10 @@ hr {
 .w-90{
     width:90% !important;
 }
+/*margin-top*/
+.mt-1vh{
+    margin-top: 1vh;
+}
 /*interactions*/
 .cursor{
     cursor: pointer;
