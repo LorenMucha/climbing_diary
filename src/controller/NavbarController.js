@@ -13,6 +13,7 @@ class NavbarController{
                area = $(this).find('.route_area').text().toLowerCase(),
                sektor =$(this).find('.route_sektor').text().toLowerCase(),
                date = $(this).find('.route_date').text();
+
            if(!name.includes(search)
                && grade !== search
                && !area.includes(search)

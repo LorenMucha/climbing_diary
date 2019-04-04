@@ -1,18 +1,18 @@
-var sqlite3 = require('sqlite3');
+var sqlite3 = require('sqlite3'),
+    TransactionDatabase = require("sqlite3-transactions").TransactionDatabase;
 var Promise = require('bluebird');
 
 //documentation: http://www.sqlitetutorial.net/sqlite-nodejs/query/
-//https://stackabuse.com/a-sqlite-tutorial-with-node-js/
 
 class DatabaseManager{
     constructor(dbFilePath) {
-        this.db = new sqlite3.Database(dbFilePath, (err) => {
+        this.db = new TransactionDatabase(new sqlite3.Database(dbFilePath, (err) => {
           if (err) {
             console.log('Could not connect to database', err)
           } else {
             console.log('Connected to database')
           }
-        })
+        }));
       }
     get(sql, params = []) {
         return new Promise((resolve, reject) => {
@@ -57,23 +57,21 @@ class DatabaseManager{
         const manager = this;
         let runs = 0;
         return new Promise((resolve, reject) => {
-           $.each(sql_array,function(key,sql){
-               console.log(sql);
-               manager.db.run(sql, params, function (err) {
-                   if (err) {
-                       console.log('Error running sql ' + sql);
-                       console.log(err);
-                       reject(err);
-                   }else{
-                       if(runs==(sql_array.length-1)) {
-                           resolve({ id: this.lastID })
-                       }else{
-                           runs += 1;
-                       }
-                   }
-               })
-           });
-        })
+            manager.db.beginTransaction(function (err, transaction){
+                $.each(sql_array,function(key,sql) {
+                    console.log(sql);
+                    transaction.run(sql)
+                    if(runs===(sql_array.length-1)) {
+                        transaction.commit(function(err){
+                            if(err) transaction.rollback();
+                        })
+                        resolve({ id: this.lastID })
+                    }else{
+                        runs += 1;
+                    }
+                });
+            });
+        });
     }
 }
 module.exports = DatabaseManager;

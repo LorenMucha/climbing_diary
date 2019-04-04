@@ -24,20 +24,10 @@ nav .sidebar_opener h2{
     transition: 0.5s;
     padding-top: 60px;
 }
-
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
+.sidenav a{
     color: white;
-    display: block;
-    transition: 0.3s;
+    background: var(--black-color);
 }
-
-.sidenav a:hover {
-    color: var(--active-color);
-}
-
 .sidenav .closebtn {
     position: absolute;
     top: 0;

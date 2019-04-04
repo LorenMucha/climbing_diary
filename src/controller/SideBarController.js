@@ -18,14 +18,22 @@ class SideBarController{
         }
     }
     setClimbingView(){
+        this.highlightTag(this.routen);
         climbing_view.setView();
     }
     //Todo
     setBoulderView(){
+        this.highlightTag(this.bouldern);
+        main_view.clearAllViews();
+    }
+    //todo
+    setTrainingView(){
+        this.highlightTag(this.training);
         main_view.clearAllViews();
     }
     highlightTag(element){
-        $(element).css("color",Colors.getActiveColor());
+        $('.item-list-navbar').find('a').removeClass('active');
+        $(element).addClass('active');
     }
 }
 module.exports = SideBarController;

@@ -11,9 +11,17 @@ class Sidebar extends SideBarController{
         const object = this;
         $('body').append(`<div id="sidenav" class="sidenav">
                             <a href="javascript:void(0)" class="closebtn">&times;</a>
-                            <a href="#" class="training">Training</a>
-                            <a href="#" class="routen">Routen</a>
-                            <a href="#" class="bouldern">Bouldern</a>
+                            <div class="list-group-flush item-list-navbar">
+                                <a href="#" class="training list-group-item">Training</a>
+                                //todo
+                                <div class="list-group-flush">
+                                      <a href="#" class="list-group-item">Item 1.1.1</a>
+                                      <a href="#" class="list-group-item">Item 1.1.2</a>
+                                      <a href="#" class="list-group-item">Item 1.1.3</a>
+                                </div>
+                                <a href="#" class="routen list-group-item active">Routen</a>
+                                <a href="#" class="bouldern list-group-item">Bouldern</a>
+                            </div>
                         </div>`);
         //bind the click events
         $('.closebtn').on("click",function(){object.close();});

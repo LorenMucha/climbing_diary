@@ -1,7 +1,7 @@
 const AddButton = require("../view/AddButton");
 
 var filter = false;
-var order = false;
+var order = "date";
 class ClimbingViewController{
     constructor(){
         this.id_route_list = "#route_list";

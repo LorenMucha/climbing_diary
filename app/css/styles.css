@@ -26,3 +26,11 @@ hr {
 .cursor{
     cursor: pointer;
 }
+/*background*/
+.bg-black{
+    background-color: var(--black-color);
+}
+.active{
+    background-color: var(--active-color) !important;
+    border: unset !important;
+}
