@@ -1,5 +1,5 @@
 Electron App, welche als Virtuelles Routentagebuch dient. 
-Die App befindet sich noch im **Beta** Status und soll Persepktivisch noch durch einen Training- und Bouldermodus erweitert werden.
+Die App befindet sich noch im **Beta** Status und soll perspektivisch noch durch einen Training- und Bouldermodus erweitert werden.
 #### Funktionen
 - Diagramme (Verlauf- und Balkendiagramm)
 - Hinzufügen, verändern, löschen von Einträgen
