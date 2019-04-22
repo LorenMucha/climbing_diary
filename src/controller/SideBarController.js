@@ -13,27 +13,25 @@ class SideBarController{
     }
     setStartView(startView){
         if(startView==="routen"){
-            this.highlightTag(this.routen);
             this.setClimbingView();
         }
     }
     setClimbingView(){
-        this.highlightTag(this.routen);
         climbing_view.setView();
     }
     //Todo
     setBoulderView(){
-        this.highlightTag(this.bouldern);
         main_view.clearAllViews();
     }
     //todo
     setTrainingView(){
-        this.highlightTag(this.training);
         main_view.clearAllViews();
     }
-    highlightTag(element){
-        $('.item-list-navbar').find('a').removeClass('active');
-        $(element).addClass('active');
+    setTag(elem){
+        $('.selector').removeClass('active');
+        $('.sublist').hide();
+        elem.addClass('active');
+        $(`#${elem.data("el")}`).show();
     }
 }
 module.exports = SideBarController;

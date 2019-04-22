@@ -46,10 +46,12 @@ class ClimbingViewController{
             data = btn.data("val");
         if(data==="bar"){
             this.line_chart.create();
-            btn.data("val","line");
+            btn.data("val","line")
+                .text("Statistik");
         }else{
           this.bar_chart.create();
-          btn.data("val","bar");
+          btn.data("val","bar")
+              .text("Verlauf");
         }
     }
 }

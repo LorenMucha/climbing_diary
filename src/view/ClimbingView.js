@@ -12,7 +12,6 @@ class ClimbingView extends ClimbingViewController{
         super();
     }
     setRouteView(){
-        console.log(this.getFilter());
         climbing_taskRepo.getAllRoutes(this.getOrder(),this.getFilter())
             .then((data) => {
                 this.data = data;
@@ -38,7 +37,7 @@ class ClimbingView extends ClimbingViewController{
 
                 //create the stat table
                 this.table=new Table();
-                this.table.create(this.data);
+                this.table.create();
 
                 this.slider=new TimeSlider();
                 this.slider.create();

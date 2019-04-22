@@ -43,7 +43,6 @@ class ClimbingTaskRepository {
                       ${filter}
                       group by r.id 
                       Order By ${order_value} DESC`;
-        console.log(query);
         return this.manager.all(query);
     }
     getRoute(_id){
@@ -51,6 +50,7 @@ class ClimbingTaskRepository {
                       r.${this.key_routes.comment}, strftime('%d.%m.%Y',r.${this.key_routes.date}) as date, k.${this.key_sector.name} as sektor 
                       FROM ${this.table_routes} r, ${this.table_area} g, ${this.table_sector} k 
                       where g.id=r.${this.key_routes.area} and k.id=r.${this.key_routes.sector} AND r.id=${_id}`;
+        console.log(query);
         return this.manager.get(query);
     }
     getAllAreas(){
@@ -60,7 +60,6 @@ class ClimbingTaskRepository {
       let html =`SELECT s.${this.key_sector.name},s.${this.key_sector.coord} as koordinaten_sektor,a.${this.key_area.coord} as koordinaten_area,s.${this.key_sector.gebiet_id},s.id 
                                FROM ${this.table_sector} s, ${this.table_area} a 
                                where a.${this.key_area.name} Like '${_name}%' and s.${this.key_sector.gebiet_id}=a.id GROUP BY s.id`;
-      console.log(html);
       return this.manager.all(html);
     }
     getYears(){
@@ -103,6 +102,23 @@ class ClimbingTaskRepository {
         console.log(query);
         return this.manager.all(query);
     }
+    getTableData(_filter){
+        let filter = function(){
+                if(_filter){
+                    return 'where '+_filter;
+                }else{
+                    return '';
+                }
+            },
+            query=`SELECT r.${this.key_routes.level},
+                   (Select count(*) as OS from ${this.table_routes} o where r.${this.key_routes.level}=o.${this.key_routes.level} and o.${this.key_routes.style}='OS') as OS,
+                   (Select count(*) as RP from ${this.table_routes} p where r.${this.key_routes.level}=p.${this.key_routes.level} and p.${this.key_routes.style}='RP') as RP,
+                   (Select count(*) as FLASH from ${this.table_routes} f where r.${this.key_routes.level}=f.${this.key_routes.level} and f.${this.key_routes.style}='FLASH') as FLASH,count(*) as Gesamt 
+                   from ${this.table_routes} r
+                   ${filter()}
+                   group by r.${this.key_routes.level} order by r.${this.key_routes.level} DESC`;
+        return this.manager.all(query);
+    }
     insertRoute(_route){
         let query = [`
                     INSERT OR IGNORE INTO ${this.table_area} (${this.key_area.name}) 
@@ -120,7 +136,6 @@ class ClimbingTaskRepository {
                     WHERE a.${this.key_area.name} = '${_route.area.name}' 
                     AND s.${this.key_sector.name}='${_route.sector.name}'
                   `];
-        console.log(query);
         return this.manager.transact(query);
     }
     deleteRoute(_id){

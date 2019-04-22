@@ -34,3 +34,7 @@ hr {
     background-color: var(--active-color) !important;
     border: unset !important;
 }
+/*views*/
+.display-none{
+    display: none;
+}

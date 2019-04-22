@@ -29,8 +29,7 @@
     "sqlite3": "^4.0.6",
     "sqlite3-transactions": "^0.0.5",
     "d3": "^5.7.0",
-    "bootstrap-slider": "^10.6.0",
-    "vue": "^2.6.10"
+    "bootstrap-slider": "^10.6.0"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.5.0",
