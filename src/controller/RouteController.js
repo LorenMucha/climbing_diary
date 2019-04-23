@@ -33,7 +33,7 @@ class RouteController{
                 let sel = $(`${model.id_sektor}`);
                 return {"name":sel.val(),"id":sel.data("id")};
             },
-            comment =$(`${this.id_comment}`).val(),
+            comment =$(`${this.id_comment}`).val().replace("'",'"'),
             rating = $(`${this.id_rating}`).val(),
             level = $(`${this.id_level}`).val();
 
