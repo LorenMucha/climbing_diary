@@ -27,11 +27,11 @@ class RouteController{
             },
             gebiet =function(){
                 let sel = $(`${model.id_area}`);
-                return {"name":sel.val(),"id":sel.data("id")};
+                return {"name":sel.val().replace("'",'"'),"id":sel.data("id")};
             },
             sektor =function(){
                 let sel = $(`${model.id_sektor}`);
-                return {"name":sel.val(),"id":sel.data("id")};
+                return {"name":sel.val().replace("'",'"'),"id":sel.data("id")};
             },
             comment =$(`${this.id_comment}`).val().replace("'",'"'),
             rating = $(`${this.id_rating}`).val(),
