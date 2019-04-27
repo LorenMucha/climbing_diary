@@ -136,6 +136,7 @@ class ClimbingTaskRepository {
                     WHERE a.${this.key_area.name} = '${_route.area.name}' 
                     AND s.${this.key_sector.name}='${_route.sector.name}'
                   `];
+        console.log(query);
         return this.manager.transact(query);
     }
     deleteRoute(_id){
