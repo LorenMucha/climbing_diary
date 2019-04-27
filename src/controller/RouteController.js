@@ -39,13 +39,13 @@ class RouteController{
 
         let in_object = {
             date: date(),
-            name: name,
-            area: gebiet(),
+            name: name.replace("'","`"),
+            area: gebiet().replace("'","`"),
             level: level,
             style: style,
             rating: rating,
-            comment: comment,
-            sector: sektor()
+            comment: comment.replace("'","`"),
+            sector: sektor().replace("'","`")
         };
 
         climbing_taskRepo.insertRoute(in_object)

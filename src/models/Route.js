@@ -2,7 +2,7 @@ const Colors = require("./Colors");
 
 class Route{
     constructor(id,name,level,area,style,date,sektor,rating,kommentar){
-        this.id = id,
+        this.id = id;
         this.name=name;
         this.level = level;
         this.area = area;
