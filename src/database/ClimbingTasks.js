@@ -50,16 +50,13 @@ class ClimbingTaskRepository {
                       r.${this.key_routes.comment}, strftime('%d.%m.%Y',r.${this.key_routes.date}) as date, k.${this.key_sector.name} as sektor 
                       FROM ${this.table_routes} r, ${this.table_area} g, ${this.table_sector} k 
                       where g.id=r.${this.key_routes.area} and k.id=r.${this.key_routes.sector} AND r.id=${_id}`;
-        console.log(query);
         return this.manager.get(query);
     }
     getAllAreas(){
         return this.manager.all(`SELECT * FROM ${this.table_area} GROUP BY id`);
     }
-    getAllSectorsByAreaName(_name){
-      let html =`SELECT s.${this.key_sector.name},s.${this.key_sector.coord} as koordinaten_sektor,a.${this.key_area.coord} as koordinaten_area,s.${this.key_sector.gebiet_id},s.id 
-                               FROM ${this.table_sector} s, ${this.table_area} a 
-                               where a.${this.key_area.name} Like '${_name}%' and s.${this.key_sector.gebiet_id}=a.id GROUP BY s.id`;
+    getAllSectorsByAreaId(_id){
+      let html =`SELECT * FROM ${this.table_sector} where a.${this.key_sector} =${_id}%  GROUP BY s.id`;
       return this.manager.all(html);
     }
     getYears(){
@@ -99,7 +96,6 @@ class ClimbingTaskRepository {
                 FROM ${this.table_routes} r
                  ${filter()}
                 GROUP BY strftime('%Y',r.${this.key_routes.date})`;
-        console.log(query);
         return this.manager.all(query);
     }
     getTableData(_filter){
@@ -136,7 +132,6 @@ class ClimbingTaskRepository {
                     WHERE a.${this.key_area.name} = '${_route.area.name}' 
                     AND s.${this.key_sector.name}='${_route.sector.name}'
                   `];
-        console.log(query);
         return this.manager.transact(query);
     }
     deleteRoute(_id){

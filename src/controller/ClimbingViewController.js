@@ -30,6 +30,7 @@ class ClimbingViewController{
         filter=false;
     }
     setView(){
+        console.log("create Climbing View");
         let add_button = new AddButton();
         main_view.clearAllViews();
         main_view.init(true,true);

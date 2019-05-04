@@ -29,7 +29,9 @@
     "sqlite3": "^4.0.6",
     "sqlite3-transactions": "^0.0.5",
     "d3": "^5.7.0",
-    "bootstrap-slider": "^10.6.0"
+    "bootstrap-slider": "^10.6.0",
+    "leaflet": "^1.4.0",
+    "leaflet.markercluster": "^1.4.1"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.5.0",

@@ -14,8 +14,10 @@ const climbing_view = new ClimbingView();
 const Levels = require("../src/models/Levels");
 
 function main(){
-    var sidebar = new Sidebar("routen");
-    var navbar = new Navbar();
+    const sidebar = new Sidebar("routen");
+    const navbar = new Navbar();
+    sidebar.create();
+    navbar.create();
     $(window).resize(function(){
         climbing_view.refreshView();
     });

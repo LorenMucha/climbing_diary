@@ -1,3 +1,5 @@
+const MapView = require("../view/MapView");
+
 class SideBarController{
     constructor() {
         this.container = "#sidenav";
@@ -11,21 +13,19 @@ class SideBarController{
     close(){
         $(this.container).css("width",0);
     }
-    setStartView(startView){
-        if(startView==="routen"){
-            this.setClimbingView();
+    setView(_view){
+        switch(_view) {
+            case "routen":
+                climbing_view.setView();
+                break;
+            case "routen-map":
+                const map = new MapView();
+                map.createView();
+                break;
+            default:
+                climbing_view.setView();
+                break;
         }
-    }
-    setClimbingView(){
-        climbing_view.setView();
-    }
-    //Todo
-    setBoulderView(){
-        main_view.clearAllViews();
-    }
-    //todo
-    setTrainingView(){
-        main_view.clearAllViews();
     }
     setTag(elem){
         $('.selector').removeClass('active');

@@ -9,11 +9,11 @@ class MainView extends MainViewController{
            left_view = $(this.left_id);
        if (right_view.length == 0 && left_view.length == 0) {
            if (left) {
-               $(`${this.root_id}`).append(`<div class="float-left" id="${this.left_id.replace("#", "")}"></div>`);
+               $(`${this.root_id}`).append(`<div class="float-left jumbotron" id="${this.left_id.replace("#", "")}"></div>`);
            }
 
            if (right) {
-               $(`${this.root_id}`).append(`<div class="float-right" id="${this.right_id.replace("#", "")}"></div>`);
+               $(`${this.root_id}`).append(`<div class="float-right jumbotron" id="${this.right_id.replace("#", "")}"></div>`);
            }
        }
    }

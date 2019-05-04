@@ -2,9 +2,8 @@ const NavbarController = require("../controller/NavbarController");
 class Navbar extends NavbarController{
     constructor(){
         super();
-        this.init();
     }
-    init(){
+    create(){
         const menu = this;
         var sidebar = new Sidebar();
         let html = `<nav class="navbar navbar-dark bg-dark justify-content-between navbar-fixed-top">

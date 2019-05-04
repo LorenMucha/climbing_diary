@@ -16,7 +16,7 @@ class RouteCard extends RouteCardController{
                 }
                 return star_div;
             },
-            div = `<div class="container climbing_panel" style="margin-top:2em;width:80%;">
+            div = `<div class="container climbing_panel" style="margin-top:2em;">
                         <div class="card" id="card_${_route.id}" data-id="${_route.id}" data-rating="${_route.rating}">
                             <div class="card-header text-white" style="background-color: ${Colors.getGradeColor(_route.level)}">
                                 <div class="float-left"><h6 class="card-text route_name">${_route.name}</h6></div>

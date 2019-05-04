@@ -40,18 +40,17 @@ class RouteController{
         let in_object = {
             date: date(),
             name: name.replace("'","`"),
-            area: gebiet().replace("'","`"),
+            area: gebiet(),
             level: level,
             style: style,
             rating: rating,
             comment: comment.replace("'","`"),
-            sector: sektor().replace("'","`")
+            sector: sektor()
         };
 
         climbing_taskRepo.insertRoute(in_object)
             .then(() => {
                 this.remove();
-                climbing_view.setFilter(false);
                 climbing_view.setRouteView();
         });
     }
