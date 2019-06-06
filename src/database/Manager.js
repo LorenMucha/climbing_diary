@@ -59,7 +59,6 @@ class DatabaseManager{
         return new Promise((resolve, reject) => {
             manager.db.beginTransaction(function (err, transaction){
                 $.each(sql_array,function(key,sql) {
-                    console.log(sql);
                     transaction.run(sql)
                     if(runs===(sql_array.length-1)) {
                         transaction.commit(function(err){

@@ -5,6 +5,7 @@
 @import url("../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css");
 @import url("../../node_modules/leaflet/dist/leaflet.css");
 @import url("../../node_modules/leaflet.markercluster/dist/MarkerCluster.css");
+@import url("../../node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css");
 @import "autocomplete.css";
 @import "responsive.css";
 @import "styles.css";
@@ -106,14 +107,15 @@ nav .sidebar_opener h2{
 }
 /*Map--------------------*/
 #root #left_view #route-map{
-    width: 99vh;
+    width: 100vh;
 }
 /*chart-----------------*/
 #root #left_view .climbing_stat #chart{
-    height:40%;
+    height:35vh;
+    width: 100vh;
 }
 #root #left_view .climbing_stat #table{
-    height:60%;
+    height:50vh;
     overflow: auto;
 }
 #root #left_view .climbing_stat #chart .line {

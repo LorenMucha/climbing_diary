@@ -17,12 +17,10 @@ class MapViewController{
     }
     setMarker(){
         this.markers = L.markerClusterGroup({
-            spiderfyOnMaxZoom: false,
-            showCoverageOnHover: false,
-            zoomToBoundsOnClick: false
+            chunkedLoading: true
         });
         //get the area List and add the marker
-        climbing_taskRepo.getAllAreas()
+        climbing_taskRepo.getAllSectors()
             .then((data) => {
                 const object = this;
                 $.each(data,function(key,val){
@@ -34,6 +32,7 @@ class MapViewController{
                 });
             });
         this.map.addLayer(this.markers);
+        //todo zoom to Layer Group
     }
 }
 module.exports = MapViewController;

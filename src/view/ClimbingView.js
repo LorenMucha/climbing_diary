@@ -49,16 +49,22 @@ class ClimbingView extends ClimbingViewController{
         const menu = this;
         $(`${main_view.left_id}`).html(
             `
-            <div class="stat-controller container w-10">
-                <button type="button" class="btn btn-primary" id="${this.id_chartButton.replace("#","")}" data-val="bar">Verlauf</button>
-                <div id="slider_content">
-                    <div id="timeslider-label">Jahre</div>
-                    <input id="timeslider" type="text"/>
+            <div class="stat-controller container">
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-primary" id="${this.id_chartButton.replace("#","")}" data-val="bar">Verlauf</button>
+                        <div id="slider_content">
+                            <div id="timeslider-label">Jahre</div>
+                            <input id="timeslider" type="text"/>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="container float-right climbing_stat p-0">
+                            <div class="w-100" id="chart"></div>
+                            <div class="w-100" id="table"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="container float-right climbing_stat w-90">
-                <div class="w-100" id="chart"></div>
-                <div class="w-100" id="table"></div>
             </div>
             `
         );

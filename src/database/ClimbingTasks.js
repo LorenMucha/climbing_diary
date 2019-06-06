@@ -55,9 +55,18 @@ class ClimbingTaskRepository {
     getAllAreas(){
         return this.manager.all(`SELECT * FROM ${this.table_area} GROUP BY id`);
     }
+    getAllSectorsByAreaName(_name){
+        let html =`SELECT s.${this.key_sector.name},s.${this.key_sector.gebiet_id},s.id 
+                               FROM ${this.table_sector} s, ${this.table_area} a 
+                               where a.${this.key_area.name} Like '${_name}%' and s.${this.key_sector.gebiet_id}=a.id GROUP BY s.id`;
+        return this.manager.all(html);
+    }
     getAllSectorsByAreaId(_id){
       let html =`SELECT * FROM ${this.table_sector} where a.${this.key_sector} =${_id}%  GROUP BY s.id`;
       return this.manager.all(html);
+    }
+    getAllSectors(){
+        return this.manager.all(`SELECT * FROM ${this.table_sector} GROUP BY id`);
     }
     getYears(){
         return this.manager.all(`select DISTINCT(strftime('%Y',${this.key_routes.date})) as year from ${this.table_routes} order by date DESC`);
@@ -99,17 +108,17 @@ class ClimbingTaskRepository {
         return this.manager.all(query);
     }
     getTableData(_filter){
-        let filter = function(){
+        let filter = function(_replacement){
                 if(_filter){
-                    return 'where '+_filter;
+                    return (_replacement ? " AND "+_filter.replace("r.",_replacement+"."):" where "+_filter);
                 }else{
                     return '';
                 }
             },
             query=`SELECT r.${this.key_routes.level},
-                   (Select count(*) as OS from ${this.table_routes} o where r.${this.key_routes.level}=o.${this.key_routes.level} and o.${this.key_routes.style}='OS') as OS,
-                   (Select count(*) as RP from ${this.table_routes} p where r.${this.key_routes.level}=p.${this.key_routes.level} and p.${this.key_routes.style}='RP') as RP,
-                   (Select count(*) as FLASH from ${this.table_routes} f where r.${this.key_routes.level}=f.${this.key_routes.level} and f.${this.key_routes.style}='FLASH') as FLASH,count(*) as Gesamt 
+                   (Select count(*) as OS from ${this.table_routes} o where r.${this.key_routes.level}=o.${this.key_routes.level} and o.${this.key_routes.style}='OS' ${filter("o")}) as OS,
+                   (Select count(*) as RP from ${this.table_routes} p where r.${this.key_routes.level}=p.${this.key_routes.level} and p.${this.key_routes.style}='RP' ${filter("p")}) as RP,
+                   (Select count(*) as FLASH from ${this.table_routes} f where r.${this.key_routes.level}=f.${this.key_routes.level} and f.${this.key_routes.style}='FLASH' ${filter("f")}) as FLASH,count(*) as Gesamt 
                    from ${this.table_routes} r
                    ${filter()}
                    group by r.${this.key_routes.level} order by r.${this.key_routes.level} DESC`;
