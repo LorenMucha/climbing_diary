@@ -37,7 +37,7 @@ class RouteView extends RouteController{
                 stars=function(x){
                     let star_div = '';
                     for(let i=0; i<=x;i++){
-                        star_div +='&#xf005;';
+                        star_div +='&#9733;';
                     }
                     return star_div;
                 };
