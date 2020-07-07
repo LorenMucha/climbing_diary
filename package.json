@@ -37,7 +37,7 @@
     "@fortawesome/fontawesome-free": "^5.5.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
-    "electron": "^1.4.10",
+    "electron": "^9.1.0",
     "electron-builder": "^10.8.1"
   },
   "keywords": [],
